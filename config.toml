@@ -31,7 +31,7 @@ canonifyurls = true
   archive = "archives"
 
 [author]
-  name = "xlko"
+  name = "Alexander Balko"
   bio = "Why use powerpoint if there is **R**"
   job = "Research fellow at the 'Insitut für Innovationsforschung und management'"
   location = "Germany"
@@ -39,7 +39,7 @@ canonifyurls = true
   gravatarEmail = "alexanderbalko@gmail.com"
   # Your profile picture
   # Overwritten by your gravatar image if `author.gravatarEmail` is filled
-  picture = "https://images.unsplash.com/photo-1520509414578-d9cbf09933a1?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f9823f268f24523a17ebe120a2f5690e&auto=format&fit=crop&w=2149&q=80"
+  # picture = "https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png"
   # Your Twitter username without the @. E.g : thibaudlepretre
   # twitter = "thibaudlepretre"
   # Your google plus profile id. E.g : +ThibaudLepretre or 114625208755123718311
@@ -77,6 +77,7 @@ canonifyurls = true
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-question\"></i>"
   url = "/#about"
 
+  
 [[menu.links]]
   weight = 1
   identifier = "github"
@@ -192,10 +193,10 @@ canonifyurls = true
   # Comment and uncomment to enable or disable sharing options
   # If you wanna add a sharing option, read user documentation :
   # Tranquilpeak configuration > Theme configuration > sharing-options
-  [[params.sharingOptions]]
-    name = "Facebook"
-    icon = "fa-facebook-official"
-    url = "https://www.facebook.com/sharer/sharer.php?u=%s"
+  #[[params.sharingOptions]]
+  #  name = "Facebook"
+  #  icon = "fa-facebook-official"
+  #  url = "https://www.facebook.com/sharer/sharer.php?u=%s"
 
   [[params.sharingOptions]]
     name = "Twitter"
@@ -214,8 +215,9 @@ canonifyurls = true
 
   # Customize link of author avatar in sidebar
   # [params.sidebar.profile]
-  #   url = "/#about"
+  #   url = "https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png"
 
-  # Customize copyright value "© 2017 <CUSTOMIZATION>. All Rights Reserved"
-  # [params.footer]
-  #   copyright = "<a href=\"https://github.com/kakawait\">kakawait</a>"
+   #Customize copyright value "© 2017 <CUSTOMIZATION>. All Rights Reserved"
+   #[params.footer]
+   #   copyright = "<a href=\"https://github.com/kakawait\">kakawait</a>"
+   
