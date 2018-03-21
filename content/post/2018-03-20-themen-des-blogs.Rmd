@@ -1,19 +1,43 @@
 ---
-title: Themen des Blogs
+title: Einleitung in den Blog
 author: Alex
 date: '2018-03-20'
 slug: einleitung
-thumbnailImagePosition: left
-thumbnailImage: https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d95a7ecfe44e2b19f3c522572237fd13&auto=format&fit=crop&w=1189&q=80
+thumbnailImagePosition: "top"
+thumbnailImage: https://images.unsplash.com/photo-1442033025416-c6a7da752d71?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cef630c526147d4b9ec3bfa747c632a9&auto=format&fit=crop&w=1359&q=80
 categories:
   - R
   - blogdown
 tags:
   - vorwort
 ---
-Dieser Blog widmet sich der Verwendung von R und Python für die verschiedenste Fragestellungen
-und wurde in <http://rmarkdown.rstudio.com> mit dem Paket "blogdown" erstellt:
+
+Dieser Blog widmet sich den unterschiedlichsten Themen rund um
+den Bereich Datenanalyse. 
+Die Blogbeiträge werden hierbei vornehmlich
+die Programmiersprache [R](https://www.r-project.org/) nutzen,
+um die unterschiedlichsten Fragestellungen
+zu untersuchen. 
 <!--more-->
+
+
+# Warum R?
+
+Die Verwendung von **R** ergibt sich in diesem Kontext
+aus meinem CV, da es meine native Programmiersprache ist.
+Einige Beiträge werden auch andere Sprachen wie [Python](https://pandas.pydata.org/) oder [Julia](https://julialang.org/) verwenden, falls die Kompatibilität mit anderen Sprachen oder Software
+einen effizienteren Workflow verspricht.
+
+
+Die aktuelle [Debatte](https://www.r-bloggers.com/r-or-python-python-or-r-the-ongoing-debate/) in der *Data Science*-Community, ob es eine überlegene
+Sprache im Bereich der Datenanalyse gibt, ist m.E. nicht zielführend.
+Entscheidendes Kriterium hierfür sollte die zu bearbeitende Fragestellung sein.
+Die Wahl des Analyseinstruments sollte sich hieran ausrichten. In den meisten Fällen dürfte es sowieso keine Rolle spielen, welche Sprache verwendet wurde.
+
+Die Erstellung des Blogs ist mit den R-Paketen rmarkdown und
+blogdown erfolgt. Beide Pakete können mit folgenden Befehlen in der
+R-Konsole installiert und verwendet werden:
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
@@ -21,8 +45,12 @@ knitr::opts_chunk$set(collapse = TRUE)
 
 
 ```{r, echo=TRUE, eval=FALSE}
-install.packages('blogdown')
+install.packages(c('rmarkdown', 'blogdown'))
+library(rmarkdown)
 library(blogdown)
 ```
 
-Jeder Beitrag in diesem Blog ist ein
+Unter folgenden Systemvoraussetzungen:
+```{r, echo=TRUE, eval=TRUE}
+sessionInfo()
+```

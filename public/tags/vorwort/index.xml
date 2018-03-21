@@ -12,13 +12,13 @@
     
     
     <item>
-      <title>Themen des Blogs</title>
+      <title>Einleitung in den Blog</title>
       <link>/2018/03/einleitung/</link>
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/03/einleitung/</guid>
-      <description>Dieser Blog widmet sich der Verwendung von R und Python für die verschiedenste Fragestellungen und wurde in http://rmarkdown.rstudio.com mit dem Paket “blogdown” erstellt: 
-install.packages(&amp;#39;blogdown&amp;#39;) library(blogdown) Jeder Beitrag in diesem Blog ist ein</description>
+      <description>Dieser Blog widmet sich den unterschiedlichsten Themen rund um den Bereich Datenanalyse. Die Blogbeiträge werden hierbei vornehmlich die Programmiersprache R nutzen, um die unterschiedlichsten Fragestellungen zu untersuchen. 
+Warum R? Die Verwendung von R ergibt sich in diesem Kontext aus meinem CV, da es meine native Programmiersprache ist. Einige Beiträge werden auch andere Sprachen wie Python oder Julia verwenden, falls die Kompatibilität mit anderen Sprachen oder Software einen effizienteren Workflow verspricht.</description>
     </item>
     
   </channel>
