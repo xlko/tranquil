@@ -19,7 +19,7 @@
       <guid>/2018/03/verwendung-des-reporters-pakets/</guid>
       <description>Die Verwendung des “ReporteRs” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.
 Workflow  Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
-Datenwrangling, -management und -bearbeitung in R Datenanalyse und Export der Ergebnisse als .csv oder .xls in R Erstellung von Grafiken bzw.</description>
+Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Ergebnisse als .csv oder .xls in R Erstellung von Grafiken bzw.</description>
     </item>
     
   </channel>

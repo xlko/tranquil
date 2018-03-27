@@ -17,7 +17,7 @@ tags:
 <!--more-->
 <p>Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:</p>
 <ol style="list-style-type: decimal">
-<li>Datenwrangling, -management und -bearbeitung in <strong>R</strong></li>
+<li>Datenwrangling, -management und -bereinigung in <strong>R</strong></li>
 <li>Datenanalyse und Export der Ergebnisse als .csv oder .xls in <strong>R</strong></li>
 <li>Erstellung von Grafiken bzw. Tabellen in Excel</li>
 <li>Import der Grafiken und Tabellen in PowerPoint</li>
@@ -36,8 +36,106 @@ tags:
 <pre class="r"><code>install.packages(&#39;ReporteRs&#39;)
 library(ReporteRs)</code></pre>
 <p>Vom Datenmanagement bis hin zur Erstellung der PowerPoint-Präsentation ist nun der komplette Workflow in <strong>R</strong> durchführbar. Die Umsetzung dieses Workflows soll exemplarisch anhand der Schülerdaten aus NRW gezeigt werden.</p>
-<div id="datenmanagement-und--bearbeitung" class="section level2">
-<h2>Datenmanagement und -bearbeitung</h2>
+<div id="datenmanagement-und--bereinigung" class="section level2">
+<h2>Datenmanagement und -bereinigung</h2>
 <p>Die Daten können unter folgendem Befehl geladen werden:</p>
+<pre class="r"><code>schulen.nrw &lt;- read.table(&#39;/home/alex/Downloads/OpenData_Eckdaten.csv&#39;
+                          , header=TRUE
+                          , sep=&#39;;&#39;
+                          , stringsAsFactors=FALSE
+                          , dec=&#39;,&#39;
+                          , fileEncoding= &#39;WINDOWS-1252&#39;)
+str(schulen.nrw)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    3588 obs. of  14 variables:
+##  $ JAHR                 : int  2012 2012 2012 2012 2012 2012 2012 2012 2012 2012 ...
+##  $ SCHULFORM            : int  2 2 2 2 2 2 2 2 2 2 ...
+##  $ SCHULFORM_Text       : chr  &quot;Grundschule         &quot; &quot;Grundschule         &quot; &quot;Grundschule         &quot; &quot;Grundschule         &quot; ...
+##  $ REGIERUNGSBEZIRK     : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ REGIERUNGSBEZIRK_Text: chr  &quot;Reg.-Bez. Düsseldorf &quot; &quot;Reg.-Bez. Düsseldorf &quot; &quot;Reg.-Bez. Düsseldorf &quot; &quot;Reg.-Bez. Düsseldorf &quot; ...
+##  $ KREIS                : int  111 111 112 112 113 114 114 116 117 119 ...
+##  $ KREIS_Text           : chr  &quot;Krfr. Stadt Düsseldorf          &quot; &quot;Krfr. Stadt Düsseldorf          &quot; &quot;Krfr. Stadt Duisburg            &quot; &quot;Krfr. Stadt Duisburg            &quot; ...
+##  $ RECHTSFORM           : int  1 2 1 2 1 1 2 1 1 1 ...
+##  $ RECHTSFORM_Text      : chr  &quot;öffentlich&quot; &quot;privat&quot; &quot;öffentlich&quot; &quot;privat&quot; ...
+##  $ SCHULEN              : int  86 2 81 1 87 30 1 39 24 38 ...
+##  $ SCHUELER_INNEN       : int  18771 396 17007 6 18575 7638 451 9079 5481 7032 ...
+##  $ KLASSEN              : int  756 20 759 1 752 309 16 379 238 318 ...
+##  $ LEHRKRAEFTE          : int  1268 49 1198 3 1228 521 28 621 374 488 ...
+##  $ ERT_STUNDEN          : num  23710 933 22236 38 23066 ...</code></pre>
+<p>Die Daten Erfassen die Anzahl der Schüler und Schülerinnen, Klassen, Lehrkräfte und die erteilten Stunden aggregiert auf Kreisebene in NRW. Da in dieser Betrachtung nur öffentliche Schulen untersucht werden sollen, können die privaten Schulen aus dem Datensatz entfernt werden. Gleichzeitig ist aus dem Listing vorher erkennbar, dass die Textvariablen des Datensatzes unnötige Umbrüche und Leerstellen enthalten, diese sollten vor der Analyse entfernt werden:</p>
+<pre class="r"><code>## Die Namen der Variablen einheitlich kleingedruckt:
+names(schulen.nrw) &lt;- tolower(names(schulen.nrw))
+## ausschließen der Privatschulen
+schulen.nrw &lt;- schulen.nrw[!(schulen.nrw$rechtsform_text %in% &#39;privat&#39;),]
+## Entfernen der Variablen Rechtsform, da nun nur öffentliche Schulen im Datensatz sind
+schulen.nrw &lt;- schulen.nrw[!(names(schulen.nrw) %in% c(&#39;rechtsform&#39;, &#39;rechtsform_text&#39;))]
+
+## Erzeugen eines numerischen und eines text index um zu gewährleisten
+## dass auch die richtigen Fälle am ende der bearbeitung geMacht werden
+schulen.nrw$idx.chr &lt;- as.character(seq(1,nrow(schulen.nrw),1))
+schulen.nrw$idx.num &lt;- seq(1,nrow(schulen.nrw),1)
+
+
+## Ermitteln der Textvariablen und erstellen eines Datensatzes aus Textvariablen
+schulen.text &lt;- sapply(schulen.nrw, is.character)
+schulen.text &lt;- schulen.nrw[schulen.text %in% TRUE]
+## entfernen von unnötigen leerstellen und Umbrüchen in den textvariablen
+schulen.text &lt;- sapply(schulen.text, function(x){
+  x &lt;- gsub(&quot;(?&lt;=[\\s])\\s*|^\\s+|\\s+$&quot;, &quot;&quot;,perl=TRUE, x)
+  return(x)
+})
+schulen.text &lt;- as.data.frame(schulen.text)</code></pre>
+<p>Nun müssen noch die numerischen Variablen kontrolliert werden:</p>
+<pre class="r"><code>schulen.num &lt;- sapply(schulen.nrw, is.numeric)
+schulen.num &lt;- schulen.nrw[schulen.num %in% TRUE]
+apply(schulen.num , 2, summary)</code></pre>
+<pre><code>##             jahr schulform regierungsbezirk    kreis   schulen
+## Min.    2012.000   2.00000          1.00000 111.0000   1.00000
+## 1st Qu. 2013.000   8.00000          1.00000 166.0000   3.00000
+## Median  2014.000  14.00000          5.00000 513.0000   7.00000
+## Mean    2014.015  14.53666          4.69788 514.0733  12.29505
+## 3rd Qu. 2015.000  20.00000          7.00000 774.0000  12.00000
+## Max.    2016.000  88.00000          9.00000 978.0000 142.00000
+##         schueler_innen   klassen lehrkraefte ert_stunden idx.num
+## Min.            13.000    2.0000      0.0000       43.00    1.00
+## 1st Qu.       1256.250   66.7500    148.0000     2805.18  566.75
+## Median        3701.000  139.0000    317.0000     5716.45 1132.50
+## Mean          5205.754  206.7906    394.3883     7163.17 1132.50
+## 3rd Qu.       7693.500  268.0000    521.0000     9468.25 1698.25
+## Max.         39709.000 1919.0000   2806.0000    51531.00 2264.00</code></pre>
+<p>Bei der Variable “lehrkräfte” scheint es Fälle zu geben an denen 0 Lehrkräfte tätig sind. Entweder ist das ein Fehler bei der Dateneingabe oder es handelt sich um Schulen mit einer Sonderrolle. Wenn die Anzahl dieser Fälle gering, sollten solche Fälle aus dem Datensatz entfernt werden:</p>
+<pre class="r"><code>## Anteil der Fälle mit 0 Lehrkräften
+sum(schulen.num[schulen.num$lehrkraefte==0,]$schueler_innen)/sum(schulen.num$schueler_innen)</code></pre>
+<pre><code>## [1] 1.069081e-05</code></pre>
+<pre class="r"><code>## Diese Merkmalsausprägung scheint die absolute Aussnahme darzustellen,
+## diese Fälle können deshalb entfernt werden
+schulen.num &lt;- schulen.num[which(schulen.num$lehrkraefte &gt; 0), ]</code></pre>
+<p>Der Text- und der numerische Datensatz können nun wieder zusammengesetzt werden. Da aus dem numerischen Datensatz Fälle entfernt wurden, sind beide Datensätze nicht mehr identisch lang. Ein Matching über die Indexvariablen in den beiden Datensätzen erlaubt jedoch ein leichtes zusammmensetzten:</p>
+<pre class="r"><code>dim(schulen.text)[1] == dim(schulen.num)[1]</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>## Matching mittels der erstellten Indezes
+schulen.text &lt;- schulen.text[(as.numeric(schulen.text$idx.chr) %in% schulen.num$idx.num), ]
+dim(schulen.text)[1] == dim(schulen.num)[1]</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>## Jetzt müssen die Datensätze nur noch richtig sortiert werden
+## darauf können die Datensätze einfach verbunden werden
+schulen.text &lt;- schulen.text[order(as.numeric(schulen.text$idx.chr)), ]
+schulen.num  &lt;- schulen.num[order(schulen.num$idx.num), ]
+schulen.nrw  &lt;- as.data.frame(cbind(schulen.num, schulen.text))
+## Check ob die Indezes tatsächlich identisch sind,
+## falls nicht wird hier eine Fehlermeldung ausgegeben
+stopifnot(as.numeric(schulen.nrw$idx.chr) == schulen.nrw$idx.num)</code></pre>
+</div>
+<div id="datenanalyse" class="section level2">
+<h2>Datenanalyse</h2>
+<p>Die Datenbereinigung nimmt oftmals wesentlich mehr Zeit in Anspruch als die eigentliche Analyse. Bei diesem Datensatz war der Aufwand jedoch überschaubar, da es sich hierbei amtliche Daten handelt, die Vorfeld in den jeweiligen Ämtern bzw. Institutionen bearbeitet werden.</p>
+<p>Die wichtigste Frage bei OpenData-Tabellen wie diesen ist, ob relevante Informationen vorhanden sind, die für ein Reporting in Frage kommen. Die Relation von Schülerinnen und Schülern zu den Lehrkräften wird als ein Indikator zur Lehrkräfteverteilung herangezogen. Beide Informationen sind in diesem Datensatz vorhanden und können für ein Reporting genutzt:</p>
+<pre class="r"><code>schulen.nrw$lehr.distri &lt;- schulen.nrw$schueler_innen/schulen.nrw$lehrkraefte
+summary(schulen.nrw$lehr.distri)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   2.778  10.367  12.118  12.531  14.727  28.589</code></pre>
+<pre class="r"><code>## Am besten lässt sich die Verteilung mit einem Historgrammm visualisieren.
+hist(schulen.nrw$lehr.distri, col=&#39;#000000&#39;, border=&#39;white&#39;, freq=FALSE, ylim=c(0,.15))
+lines(density(schulen.nrw$lehr.distri),  col=&#39;darkgrey&#39;)</code></pre>
+<p><img src="/post/2018-03-26-verwendung-des-reporters-pakets_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 </div>

@@ -20,7 +20,7 @@ Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendu
 
 Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
 
-  1. Datenwrangling, -management und -bearbeitung in **R**
+  1. Datenwrangling, -management und -bereinigung in **R**
   2. Datenanalyse und Export der Ergebnisse als .csv oder .xls in **R**
   3. Erstellung von Grafiken bzw. Tabellen in Excel
   4. Import der Grafiken und Tabellen in PowerPoint 
@@ -54,6 +54,102 @@ Vom Datenmanagement bis hin zur Erstellung der PowerPoint-Präsentation ist nun 
 Workflow in **R** durchführbar. Die Umsetzung dieses Workflows soll exemplarisch
 anhand der Schülerdaten aus NRW gezeigt werden.
 
-## Datenmanagement und -bearbeitung
+## Datenmanagement und -bereinigung
 
 Die Daten können unter folgendem Befehl geladen werden:
+
+```{r, echo=TRUE, eval=TRUE}
+schulen.nrw <- read.table('/home/alex/Downloads/OpenData_Eckdaten.csv'
+                          , header=TRUE
+                          , sep=';'
+                          , stringsAsFactors=FALSE
+                          , dec=','
+                          , fileEncoding= 'WINDOWS-1252')
+str(schulen.nrw)
+```
+Die Daten Erfassen die Anzahl der Schüler und Schülerinnen, Klassen, Lehrkräfte und die erteilten
+Stunden aggregiert auf Kreisebene in NRW. Da in dieser Betrachtung nur öffentliche Schulen untersucht werden sollen, können die privaten Schulen aus dem Datensatz entfernt werden.
+Gleichzeitig ist aus dem Listing vorher erkennbar, dass die Textvariablen des Datensatzes
+unnötige Umbrüche und Leerstellen enthalten, diese sollten vor der Analyse entfernt werden:
+```{r, echo=TRUE, eval=TRUE}
+## Die Namen der Variablen einheitlich kleingedruckt:
+names(schulen.nrw) <- tolower(names(schulen.nrw))
+## ausschließen der Privatschulen
+schulen.nrw <- schulen.nrw[!(schulen.nrw$rechtsform_text %in% 'privat'),]
+## Entfernen der Variablen Rechtsform, da nun nur öffentliche Schulen im Datensatz sind
+schulen.nrw <- schulen.nrw[!(names(schulen.nrw) %in% c('rechtsform', 'rechtsform_text'))]
+
+## Erzeugen eines numerischen und eines text index um zu gewährleisten
+## dass auch die richtigen Fälle am ende der bearbeitung geMacht werden
+schulen.nrw$idx.chr <- as.character(seq(1,nrow(schulen.nrw),1))
+schulen.nrw$idx.num <- seq(1,nrow(schulen.nrw),1)
+
+
+## Ermitteln der Textvariablen und erstellen eines Datensatzes aus Textvariablen
+schulen.text <- sapply(schulen.nrw, is.character)
+schulen.text <- schulen.nrw[schulen.text %in% TRUE]
+## entfernen von unnötigen leerstellen und Umbrüchen in den textvariablen
+schulen.text <- sapply(schulen.text, function(x){
+  x <- gsub("(?<=[\\s])\\s*|^\\s+|\\s+$", "",perl=TRUE, x)
+  return(x)
+})
+schulen.text <- as.data.frame(schulen.text)
+```
+
+Nun müssen noch die numerischen Variablen kontrolliert werden:
+```{r, eval=TRUE, echor=TRUE}
+schulen.num <- sapply(schulen.nrw, is.numeric)
+schulen.num <- schulen.nrw[schulen.num %in% TRUE]
+apply(schulen.num , 2, summary)
+```
+Bei der Variable "lehrkräfte" scheint es Fälle zu geben an denen
+0 Lehrkräfte tätig sind. Entweder ist das ein Fehler bei der Dateneingabe
+oder es handelt sich um Schulen mit einer Sonderrolle.
+Wenn die Anzahl dieser Fälle gering, sollten solche Fälle aus dem Datensatz
+entfernt werden:
+```{r, echo=TRUE, eval=TRUE}
+## Anteil der Fälle mit 0 Lehrkräften
+sum(schulen.num[schulen.num$lehrkraefte==0,]$schueler_innen)/sum(schulen.num$schueler_innen)
+## Diese Merkmalsausprägung scheint die absolute Aussnahme darzustellen,
+## diese Fälle können deshalb entfernt werden
+schulen.num <- schulen.num[which(schulen.num$lehrkraefte > 0), ]
+```
+Der Text- und der numerische Datensatz können nun wieder zusammengesetzt werden.
+Da aus dem numerischen Datensatz Fälle entfernt wurden, sind beide Datensätze nicht
+mehr identisch lang. Ein Matching über die Indexvariablen in den beiden Datensätzen
+erlaubt jedoch ein leichtes zusammmensetzten:
+```{r, eval=TRUE, echo=TRUE}
+dim(schulen.text)[1] == dim(schulen.num)[1]
+## Matching mittels der erstellten Indezes
+schulen.text <- schulen.text[(as.numeric(schulen.text$idx.chr) %in% schulen.num$idx.num), ]
+dim(schulen.text)[1] == dim(schulen.num)[1]
+## Jetzt müssen die Datensätze nur noch richtig sortiert werden
+## darauf können die Datensätze einfach verbunden werden
+schulen.text <- schulen.text[order(as.numeric(schulen.text$idx.chr)), ]
+schulen.num  <- schulen.num[order(schulen.num$idx.num), ]
+schulen.nrw  <- as.data.frame(cbind(schulen.num, schulen.text))
+## Check ob die Indezes tatsächlich identisch sind,
+## falls nicht wird hier eine Fehlermeldung ausgegeben
+stopifnot(as.numeric(schulen.nrw$idx.chr) == schulen.nrw$idx.num)
+```
+
+## Datenanalyse
+Die Datenbereinigung nimmt oftmals wesentlich mehr Zeit in Anspruch als
+die eigentliche Analyse. Bei diesem Datensatz war der Aufwand jedoch
+überschaubar, da es sich hierbei amtliche Daten handelt, die Vorfeld
+in den jeweiligen Ämtern bzw. Institutionen bearbeitet werden.
+
+Die wichtigste Frage bei OpenData-Tabellen wie diesen ist, ob relevante
+Informationen vorhanden sind, die für ein Reporting in Frage kommen.
+Die Relation von Schülerinnen und Schülern zu den Lehrkräften wird als
+ein Indikator zur Lehrkräfteverteilung herangezogen. Beide Informationen
+sind in diesem Datensatz vorhanden und können für ein Reporting genutzt:
+
+```{r, eval=TRUE, echo=TRUE}
+schulen.nrw$lehr.distri <- schulen.nrw$schueler_innen/schulen.nrw$lehrkraefte
+summary(schulen.nrw$lehr.distri)
+## Am besten lässt sich die Verteilung mit einem Historgrammm visualisieren.
+hist(schulen.nrw$lehr.distri, col='#000000', border='white', freq=FALSE, ylim=c(0,.15))
+lines(density(schulen.nrw$lehr.distri),  col='darkgrey')
+```
+
