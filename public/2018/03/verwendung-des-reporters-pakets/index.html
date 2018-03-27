@@ -22,7 +22,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.37.1 with theme Tranquilpeak 0.4.3-BETA">
-    <title>Einleitung in den Blog</title>
+    <title>Verwendung des ReporteRs-Pakets</title>
     <meta name="author" content="Alexander Balko">
     <meta name="keywords" content="">
 
@@ -30,18 +30,21 @@
     
 
     
-    <meta name="description" content="Dieser Blog widmet sich den unterschiedlichsten Themen rund um den Bereich Datenanalyse. Die Blogbeiträge werden hierbei vornehmlich die Programmiersprache R nutzen, um die unterschiedlichsten Fragestellungen zu untersuchen. 
-Warum R? Die Verwendung von R ergibt sich in diesem Kontext aus meinem CV, da es meine native Programmiersprache ist. Einige Beiträge werden auch andere Sprachen wie Python oder Julia verwenden, falls die Kompatibilität mit anderen Sprachen oder Software einen effizienteren Workflow verspricht.">
-    <meta property="og:description" content="Dieser Blog widmet sich den unterschiedlichsten Themen rund um den Bereich Datenanalyse. Die Blogbeiträge werden hierbei vornehmlich die Programmiersprache R nutzen, um die unterschiedlichsten Fragestellungen zu untersuchen. 
-Warum R? Die Verwendung von R ergibt sich in diesem Kontext aus meinem CV, da es meine native Programmiersprache ist. Einige Beiträge werden auch andere Sprachen wie Python oder Julia verwenden, falls die Kompatibilität mit anderen Sprachen oder Software einen effizienteren Workflow verspricht.">
+    <meta name="description" content="Die Verwendung des “ReporteRs” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.
+Workflow  Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
+Datenwrangling, -management und -bearbeitung in R Datenanalyse und Export der Ergebnisse als .csv oder .xls in R Erstellung von Grafiken bzw.">
+    <meta property="og:description" content="Die Verwendung des “ReporteRs” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.
+Workflow  Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
+Datenwrangling, -management und -bearbeitung in R Datenanalyse und Export der Ergebnisse als .csv oder .xls in R Erstellung von Grafiken bzw.">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Einleitung in den Blog">
-    <meta property="og:url" content="/2018/03/einleitung/">
+    <meta property="og:title" content="Verwendung des ReporteRs-Pakets">
+    <meta property="og:url" content="/2018/03/verwendung-des-reporters-pakets/">
     <meta property="og:site_name" content="Alexander Balko">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Alexander Balko">
-    <meta name="twitter:description" content="Dieser Blog widmet sich den unterschiedlichsten Themen rund um den Bereich Datenanalyse. Die Blogbeiträge werden hierbei vornehmlich die Programmiersprache R nutzen, um die unterschiedlichsten Fragestellungen zu untersuchen. 
-Warum R? Die Verwendung von R ergibt sich in diesem Kontext aus meinem CV, da es meine native Programmiersprache ist. Einige Beiträge werden auch andere Sprachen wie Python oder Julia verwenden, falls die Kompatibilität mit anderen Sprachen oder Software einen effizienteren Workflow verspricht.">
+    <meta name="twitter:description" content="Die Verwendung des “ReporteRs” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.
+Workflow  Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
+Datenwrangling, -management und -bearbeitung in R Datenanalyse und Export der Ergebnisse als .csv oder .xls in R Erstellung von Grafiken bzw.">
     
     
 
@@ -52,8 +55,6 @@ Warum R? Die Verwendung von R ergibt sich in diesem Kontext aus meinem CV, da es
       <meta property="og:image" content="//www.gravatar.com/avatar/b09a030533d7f9d4df4bec307ece70ad?s=640">
     
 
-    
-      <meta property="og:image" content="https://images.unsplash.com/photo-1442033025416-c6a7da752d71?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cef630c526147d4b9ec3bfa747c632a9&auto=format&fit=crop&w=1359&q=80">
     
     
     
@@ -228,15 +229,15 @@ Warum R? Die Verwendung von R ergibt sich in diesem Kontext aus meinem CV, da es
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Einleitung in den Blog
+      Verwendung des ReporteRs-Pakets
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-03-20T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-03-26T00:00:00Z">
         
-  March 20, 2018
+  March 26, 2018
 
       </time>
     
@@ -245,9 +246,7 @@ Warum R? Die Verwendung von R ergibt sich in diesem Kontext aus meinem CV, da es
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/r">R</a>, 
-    
-      <a class="category-link" href="/categories/blogdown">blogdown</a>
+      <a class="category-link" href="/categories/r-reporters-opendata">R ReporteRs OpenData</a>
     
   
 
@@ -257,42 +256,35 @@ Warum R? Die Verwendung von R ergibt sich in diesem Kontext aus meinem CV, da es
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>Dieser Blog widmet sich den unterschiedlichsten Themen rund um den Bereich Datenanalyse. Die Blogbeiträge werden hierbei vornehmlich die Programmiersprache <a href="https://www.r-project.org/">R</a> nutzen, um die unterschiedlichsten Fragestellungen zu untersuchen. <!--more--></p>
-<div id="warum-r" class="section level1">
-<h1>Warum R?</h1>
-<p>Die Verwendung von <strong>R</strong> ergibt sich in diesem Kontext aus meinem CV, da es meine native Programmiersprache ist. Einige Beiträge werden auch andere Sprachen wie <a href="https://pandas.pydata.org/">Python</a> oder <a href="https://julialang.org/">Julia</a> verwenden, falls die Kompatibilität mit anderen Sprachen oder Software einen effizienteren Workflow verspricht.</p>
-<p>Die aktuelle <a href="https://www.r-bloggers.com/r-or-python-python-or-r-the-ongoing-debate/">Debatte</a> in der <em>Data Science</em>-Community, ob es eine überlegene Sprache im Bereich der Datenanalyse gibt, ist m.E. nicht zielführend. Entscheidendes Kriterium hierfür sollte die zu bearbeitende Fragestellung sein. Die Wahl des Analyseinstruments sollte sich hieran ausrichten. In den meisten Fällen dürfte es sowieso keine Rolle spielen, welche Sprache verwendet wurde.</p>
-<p>Die Erstellung des Blogs ist mit den R-Paketen rmarkdown und blogdown erfolgt. Beide Pakete können mit folgenden Befehlen in der R-Konsole installiert und verwendet werden:</p>
-<pre class="r"><code>install.packages(c(&#39;rmarkdown&#39;, &#39;blogdown&#39;))
-library(rmarkdown)
-library(blogdown)</code></pre>
-<p>Unter folgenden Systemvoraussetzungen:</p>
-<pre class="r"><code>sessionInfo()
-## R version 3.4.4 (2018-03-15)
-## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Ubuntu 16.04.4 LTS
-## 
-## Matrix products: default
-## BLAS: /usr/lib/openblas-base/libblas.so.3
-## LAPACK: /usr/lib/libopenblasp-r0.2.18.so
-## 
-## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=de_DE.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=de_DE.UTF-8    LC_MESSAGES=en_US.UTF-8   
-##  [7] LC_PAPER=de_DE.UTF-8       LC_NAME=C                 
-##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=de_DE.UTF-8 LC_IDENTIFICATION=C       
-## 
-## attached base packages:
-## [1] methods   stats     graphics  grDevices utils     datasets  base     
-## 
-## loaded via a namespace (and not attached):
-##  [1] compiler_3.4.4  backports_1.1.2 bookdown_0.7    magrittr_1.5   
-##  [5] rprojroot_1.3-2 tools_3.4.4     htmltools_0.3.6 yaml_2.1.17    
-##  [9] Rcpp_0.12.15    stringi_1.1.6   rmarkdown_1.9   blogdown_0.5   
-## [13] knitr_1.20      stringr_1.3.0   digest_0.6.15   xfun_0.1       
-## [17] evaluate_0.10.1</code></pre>
+              <p>Die Verwendung des “ReporteRs” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.</p>
+<div id="workflow" class="section level1">
+<h1>Workflow</h1>
+<!--more-->
+<p>Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:</p>
+<ol style="list-style-type: decimal">
+<li>Datenwrangling, -management und -bearbeitung in <strong>R</strong></li>
+<li>Datenanalyse und Export der Ergebnisse als .csv oder .xls in <strong>R</strong></li>
+<li>Erstellung von Grafiken bzw. Tabellen in Excel</li>
+<li>Import der Grafiken und Tabellen in PowerPoint</li>
+<li>Erstellen der PowerPoint-Präsentation</li>
+</ol>
+<p>Selbstverständlich kann Schritt drei auch in <strong>R</strong> erledigt werden. Dieser Workflow ist jedoch meines Erachtens aus folgenden Gründen mit einigen Mängeln versehen.</p>
+</div>
+<div id="fallstricke" class="section level1">
+<h1>Fallstricke</h1>
+<ul>
+<li>Gerade beim copy/paste von langen Zahlenkolonnen schleichen sich immer wieder Fehler ein, da Bezüge falsch kopiert oder Zeilen/Spalten übersehen werden</li>
+<li>Schritt 4 und 5 können als eine Art “Blackbox” für weitere Nutzer betrachtet werden, da das Vorgehen des Autors beim Erstellen der Grafiken und Präsentation nicht dokumentiert wird</li>
+<li>Daraus folgt, dass die Reproduzierbarkeit der Ergebnisse nicht gewährleistet wird</li>
+</ul>
+<p>Ein Paket, welches Schritt 1 bis 5 in <strong>R</strong> durchführbar macht, würde die meisten Fehler die sich aus den Fallstricken ergeben, vermeiden und ein automatisiertes Reporting erlauben. Gleichzeitig wären die Ergebnisse (je nach Verfügbarkeit der Daten) reproduzierbar und das Vorgehen des Autors dokumentiert. Das R-Paket “ReporteRs” von Dave Gohel bietet diese Funktion und kann über CRAN bezogen werden:</p>
+<pre class="r"><code>install.packages(&#39;ReporteRs&#39;)
+library(ReporteRs)</code></pre>
+<p>Vom Datenmanagement bis hin zur Erstellung der PowerPoint-Präsentation ist nun der komplette Workflow in <strong>R</strong> durchführbar. Die Umsetzung dieses Workflows soll exemplarisch anhand der Schülerdaten aus NRW gezeigt werden.</p>
+<div id="datenmanagement-und--bearbeitung" class="section level2">
+<h2>Datenmanagement und -bearbeitung</h2>
+<p>Die Daten können unter folgendem Befehl geladen werden:</p>
+</div>
 </div>
 
               
@@ -306,7 +298,7 @@ library(blogdown)</code></pre>
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="/tags/vorwort/">vorwort</a>
+  <a class="tag tag--primary tag--small" href="/tags/r-pakete/">R Pakete</a>
 
                   </div>
                 
@@ -319,7 +311,7 @@ library(blogdown)</code></pre>
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/verwendung-des-reporters-pakets/" data-tooltip="Verwendung des ReporteRs-Pakets">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -327,7 +319,7 @@ library(blogdown)</code></pre>
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/einleitung/" data-tooltip="Einleitung in den Blog">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -345,13 +337,13 @@ library(blogdown)</code></pre>
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/einleitung/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/verwendung-des-reporters-pakets/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/einleitung/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/verwendung-des-reporters-pakets/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -399,7 +391,7 @@ library(blogdown)</code></pre>
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/verwendung-des-reporters-pakets/" data-tooltip="Verwendung des ReporteRs-Pakets">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -407,7 +399,7 @@ library(blogdown)</code></pre>
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/einleitung/" data-tooltip="Einleitung in den Blog">
               
                   <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                   <i class="fa fa-angle-right"></i>
@@ -425,13 +417,13 @@ library(blogdown)</code></pre>
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/einleitung/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/verwendung-des-reporters-pakets/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/einleitung/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/verwendung-des-reporters-pakets/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -461,13 +453,13 @@ library(blogdown)</code></pre>
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F03%2Feinleitung%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F03%2Fverwendung-des-reporters-pakets%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F03%2Feinleitung%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F03%2Fverwendung-des-reporters-pakets%2F">
           <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
         </a>
       </li>
@@ -610,9 +602,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = '\/2018\/03\/einleitung\/';
+          this.page.url = '\/2018\/03\/verwendung-des-reporters-pakets\/';
           
-            this.page.identifier = '\/2018\/03\/einleitung\/'
+            this.page.identifier = '\/2018\/03\/verwendung-des-reporters-pakets\/'
           
         };
         (function() {

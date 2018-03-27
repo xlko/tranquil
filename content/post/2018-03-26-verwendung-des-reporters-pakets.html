@@ -1,0 +1,43 @@
+---
+title: Verwendung des ReporteRs-Pakets
+author: Alexander Balko
+date: '2018-03-26'
+slug: verwendung-des-reporters-pakets
+categories:
+  - R ReporteRs OpenData
+tags:
+  - R Pakete
+---
+
+
+
+<p>Die Verwendung des “ReporteRs” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.</p>
+<div id="workflow" class="section level1">
+<h1>Workflow</h1>
+<!--more-->
+<p>Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:</p>
+<ol style="list-style-type: decimal">
+<li>Datenwrangling, -management und -bearbeitung in <strong>R</strong></li>
+<li>Datenanalyse und Export der Ergebnisse als .csv oder .xls in <strong>R</strong></li>
+<li>Erstellung von Grafiken bzw. Tabellen in Excel</li>
+<li>Import der Grafiken und Tabellen in PowerPoint</li>
+<li>Erstellen der PowerPoint-Präsentation</li>
+</ol>
+<p>Selbstverständlich kann Schritt drei auch in <strong>R</strong> erledigt werden. Dieser Workflow ist jedoch meines Erachtens aus folgenden Gründen mit einigen Mängeln versehen.</p>
+</div>
+<div id="fallstricke" class="section level1">
+<h1>Fallstricke</h1>
+<ul>
+<li>Gerade beim copy/paste von langen Zahlenkolonnen schleichen sich immer wieder Fehler ein, da Bezüge falsch kopiert oder Zeilen/Spalten übersehen werden</li>
+<li>Schritt 4 und 5 können als eine Art “Blackbox” für weitere Nutzer betrachtet werden, da das Vorgehen des Autors beim Erstellen der Grafiken und Präsentation nicht dokumentiert wird</li>
+<li>Daraus folgt, dass die Reproduzierbarkeit der Ergebnisse nicht gewährleistet wird</li>
+</ul>
+<p>Ein Paket, welches Schritt 1 bis 5 in <strong>R</strong> durchführbar macht, würde die meisten Fehler die sich aus den Fallstricken ergeben, vermeiden und ein automatisiertes Reporting erlauben. Gleichzeitig wären die Ergebnisse (je nach Verfügbarkeit der Daten) reproduzierbar und das Vorgehen des Autors dokumentiert. Das R-Paket “ReporteRs” von Dave Gohel bietet diese Funktion und kann über CRAN bezogen werden:</p>
+<pre class="r"><code>install.packages(&#39;ReporteRs&#39;)
+library(ReporteRs)</code></pre>
+<p>Vom Datenmanagement bis hin zur Erstellung der PowerPoint-Präsentation ist nun der komplette Workflow in <strong>R</strong> durchführbar. Die Umsetzung dieses Workflows soll exemplarisch anhand der Schülerdaten aus NRW gezeigt werden.</p>
+<div id="datenmanagement-und--bearbeitung" class="section level2">
+<h2>Datenmanagement und -bearbeitung</h2>
+<p>Die Daten können unter folgendem Befehl geladen werden:</p>
+</div>
+</div>

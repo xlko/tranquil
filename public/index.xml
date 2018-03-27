@@ -6,10 +6,21 @@
     <description>Recent content on Alexander Balko</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 26 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Verwendung des ReporteRs-Pakets</title>
+      <link>/2018/03/verwendung-des-reporters-pakets/</link>
+      <pubDate>Mon, 26 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/03/verwendung-des-reporters-pakets/</guid>
+      <description>Die Verwendung des “ReporteRs” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.
+Workflow  Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
+Datenwrangling, -management und -bearbeitung in R Datenanalyse und Export der Ergebnisse als .csv oder .xls in R Erstellung von Grafiken bzw.</description>
+    </item>
     
     <item>
       <title>Einleitung in den Blog</title>

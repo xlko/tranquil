@@ -1,0 +1,59 @@
+---
+title: Verwendung des ReporteRs-Pakets
+author: Alexander Balko
+date: '2018-03-26'
+slug: verwendung-des-reporters-pakets
+categories:
+  - R ReporteRs OpenData
+tags:
+  - R Pakete
+---
+
+
+Die Verwendung des "ReporteRs" Pakets ist für Anwender sinnvoll,
+die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht.
+Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw.
+Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.
+
+# Workflow
+<!--more-->
+
+Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
+
+  1. Datenwrangling, -management und -bearbeitung in **R**
+  2. Datenanalyse und Export der Ergebnisse als .csv oder .xls in **R**
+  3. Erstellung von Grafiken bzw. Tabellen in Excel
+  4. Import der Grafiken und Tabellen in PowerPoint 
+  5. Erstellen der PowerPoint-Präsentation
+  
+Selbstverständlich kann Schritt drei auch in **R** erledigt werden.
+Dieser Workflow ist jedoch meines Erachtens aus folgenden Gründen mit einigen
+Mängeln versehen.
+
+# Fallstricke
+
+- Gerade beim copy/paste von langen Zahlenkolonnen schleichen sich immer wieder
+  Fehler ein, da Bezüge falsch kopiert  oder Zeilen/Spalten übersehen werden
+- Schritt 4 und 5 können als eine Art "Blackbox" für weitere Nutzer betrachtet werden,
+  da das Vorgehen des Autors beim Erstellen der Grafiken und Präsentation nicht
+  dokumentiert wird
+- Daraus folgt, dass die Reproduzierbarkeit der Ergebnisse nicht gewährleistet wird
+
+Ein Paket, welches Schritt 1 bis 5 in **R** durchführbar macht, würde die meisten
+Fehler die sich aus den Fallstricken ergeben, vermeiden und ein
+automatisiertes Reporting erlauben. Gleichzeitig wären die Ergebnisse
+(je nach Verfügbarkeit der Daten) reproduzierbar und das Vorgehen des Autors dokumentiert.
+Das R-Paket "ReporteRs" von Dave Gohel bietet diese Funktion und kann über CRAN bezogen werden:
+
+```{r, echo=TRUE, eval=FALSE}
+install.packages('ReporteRs')
+library(ReporteRs)
+```
+
+Vom Datenmanagement bis hin zur Erstellung der PowerPoint-Präsentation ist nun der komplette
+Workflow in **R** durchführbar. Die Umsetzung dieses Workflows soll exemplarisch
+anhand der Schülerdaten aus NRW gezeigt werden.
+
+## Datenmanagement und -bearbeitung
+
+Die Daten können unter folgendem Befehl geladen werden:
