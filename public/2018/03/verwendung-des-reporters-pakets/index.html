@@ -22,7 +22,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.37.1 with theme Tranquilpeak 0.4.3-BETA">
-    <title>Verwendung des ReporteRs-Pakets</title>
+    <title>Von der Datenquelle zur PowerPointPräsi in einer Anwendung</title>
     <meta name="author" content="Alexander Balko">
     <meta name="keywords" content="">
 
@@ -30,19 +30,19 @@
     
 
     
-    <meta name="description" content="Die Verwendung des “ReporteRs” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.
+    <meta name="description" content="Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.
 Workflow  Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
 Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Ergebnisse als .csv oder .xls in R Erstellung von Grafiken bzw.">
-    <meta property="og:description" content="Die Verwendung des “ReporteRs” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.
+    <meta property="og:description" content="Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.
 Workflow  Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
 Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Ergebnisse als .csv oder .xls in R Erstellung von Grafiken bzw.">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Verwendung des ReporteRs-Pakets">
+    <meta property="og:title" content="Von der Datenquelle zur PowerPointPräsi in einer Anwendung">
     <meta property="og:url" content="/2018/03/verwendung-des-reporters-pakets/">
     <meta property="og:site_name" content="Alexander Balko">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Alexander Balko">
-    <meta name="twitter:description" content="Die Verwendung des “ReporteRs” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.
+    <meta name="twitter:description" content="Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.
 Workflow  Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
 Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Ergebnisse als .csv oder .xls in R Erstellung von Grafiken bzw.">
     
@@ -229,7 +229,7 @@ Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Er
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Verwendung des ReporteRs-Pakets
+      Von der Datenquelle zur PowerPointPräsi in einer Anwendung
     </h1>
   
   
@@ -256,7 +256,7 @@ Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Er
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>Die Verwendung des “ReporteRs” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.</p>
+              <p>Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.</p>
 <div id="workflow" class="section level1">
 <h1>Workflow</h1>
 <!--more-->
@@ -277,19 +277,21 @@ Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Er
 <li>Schritt 4 und 5 können als eine Art “Blackbox” für weitere Nutzer betrachtet werden, da das Vorgehen des Autors beim Erstellen der Grafiken und Präsentation nicht dokumentiert wird</li>
 <li>Daraus folgt, dass die Reproduzierbarkeit der Ergebnisse nicht gewährleistet wird</li>
 </ul>
-<p>Ein Paket, welches Schritt 1 bis 5 in <strong>R</strong> durchführbar macht, würde die meisten Fehler die sich aus den Fallstricken ergeben, vermeiden und ein automatisiertes Reporting erlauben. Gleichzeitig wären die Ergebnisse (je nach Verfügbarkeit der Daten) reproduzierbar und das Vorgehen des Autors dokumentiert. Das R-Paket “ReporteRs” von Dave Gohel bietet diese Funktion und kann über CRAN bezogen werden:</p>
-<pre class="r"><code>install.packages(&#39;ReporteRs&#39;)
-library(ReporteRs)</code></pre>
+<p>Ein Paket, welches Schritt 1 bis 5 in <strong>R</strong> durchführbar macht, würde die meisten Fehler die sich aus den Fallstricken ergeben, vermeiden und ein automatisiertes Reporting erlauben. Gleichzeitig wären die Ergebnisse (je nach Verfügbarkeit der Daten) reproduzierbar und das Vorgehen des Autors dokumentiert. Das R-Paket “officer” von <a href="https://davidgohel.github.io/officer/index.html">Dave Gohel</a> bietet diese Funktion und kann über CRAN bezogen werden:</p>
+<pre class="r"><code>install.packages(&#39;officer&#39;)
+install.packages(&#39;rvg&#39;)
+library(officer)
+library(rvg)</code></pre>
 <p>Vom Datenmanagement bis hin zur Erstellung der PowerPoint-Präsentation ist nun der komplette Workflow in <strong>R</strong> durchführbar. Die Umsetzung dieses Workflows soll exemplarisch anhand der Schülerdaten aus NRW gezeigt werden.</p>
 <div id="datenmanagement-und--bereinigung" class="section level2">
 <h2>Datenmanagement und -bereinigung</h2>
 <p>Die Daten können unter folgendem Befehl geladen werden:</p>
-<pre class="r"><code>schulen.nrw &lt;- read.table(&#39;/home/alex/Downloads/OpenData_Eckdaten.csv&#39;
-                          , header=TRUE
-                          , sep=&#39;;&#39;
-                          , stringsAsFactors=FALSE
-                          , dec=&#39;,&#39;
-                          , fileEncoding= &#39;WINDOWS-1252&#39;)
+<pre class="r"><code>schulen.nrw &lt;- read.table(&#39;https://www.schulministerium.nrw.de/docs/bp/Ministerium/Open_MSB/Open_Data/FAQ-Eckdaten/OpenData_Eckdaten.csv&#39;
+                   , header=TRUE
+                   , sep=&#39;;&#39;
+                   , stringsAsFactors=FALSE
+                   , dec=&#39;,&#39;
+                   , fileEncoding= &#39;WINDOWS-1252&#39;)
 str(schulen.nrw)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    3588 obs. of  14 variables:
 ##  $ JAHR                 : int  2012 2012 2012 2012 2012 2012 2012 2012 2012 2012 ...
@@ -306,7 +308,7 @@ str(schulen.nrw)</code></pre>
 ##  $ KLASSEN              : int  756 20 759 1 752 309 16 379 238 318 ...
 ##  $ LEHRKRAEFTE          : int  1268 49 1198 3 1228 521 28 621 374 488 ...
 ##  $ ERT_STUNDEN          : num  23710 933 22236 38 23066 ...</code></pre>
-<p>Die Daten Erfassen die Anzahl der Schüler und Schülerinnen, Klassen, Lehrkräfte und die erteilten Stunden aggregiert auf Kreisebene in NRW. Da in dieser Betrachtung nur öffentliche Schulen untersucht werden sollen, können die privaten Schulen aus dem Datensatz entfernt werden. Gleichzeitig ist aus dem Listing vorher erkennbar, dass die Textvariablen des Datensatzes unnötige Umbrüche und Leerstellen enthalten, diese sollten vor der Analyse entfernt werden:</p>
+<p>Die Daten Erfassen die Anzahl der Schüler und Schülerinnen (SuS), Klassen, Lehrkräfte und die erteilten Stunden aggregiert auf Kreisebene in NRW. Da in dieser Betrachtung nur öffentliche Schulen untersucht werden sollen, werden die privaten Schulen aus dem Datensatz entfernt. Gleichzeitig ist aus dem Listing vorher erkennbar, dass die Textvariablen des Datensatzes unnötige Umbrüche und Leerstellen enthalten, diese sollten vor der Analyse entfernt werden:</p>
 <pre class="r"><code>## Die Namen der Variablen einheitlich kleingedruckt:
 names(schulen.nrw) &lt;- tolower(names(schulen.nrw))
 ## ausschließen der Privatschulen
@@ -327,7 +329,9 @@ schulen.text &lt;- schulen.nrw[schulen.text %in% TRUE]
 schulen.text &lt;- sapply(schulen.text, function(x){
   x &lt;- gsub(&quot;(?&lt;=[\\s])\\s*|^\\s+|\\s+$&quot;, &quot;&quot;,perl=TRUE, x)
   return(x)
-})
+    }
+  )
+
 schulen.text &lt;- as.data.frame(schulen.text)</code></pre>
 <p>Nun müssen noch die numerischen Variablen kontrolliert werden:</p>
 <pre class="r"><code>schulen.num &lt;- sapply(schulen.nrw, is.numeric)
@@ -347,14 +351,14 @@ apply(schulen.num , 2, summary)</code></pre>
 ## Mean          5205.754  206.7906    394.3883     7163.17 1132.50
 ## 3rd Qu.       7693.500  268.0000    521.0000     9468.25 1698.25
 ## Max.         39709.000 1919.0000   2806.0000    51531.00 2264.00</code></pre>
-<p>Bei der Variable “lehrkräfte” scheint es Fälle zu geben an denen 0 Lehrkräfte tätig sind. Entweder ist das ein Fehler bei der Dateneingabe oder es handelt sich um Schulen mit einer Sonderrolle. Wenn die Anzahl dieser Fälle gering, sollten solche Fälle aus dem Datensatz entfernt werden:</p>
+<p>Bei der Variable “lehrkräfte” scheint es Fälle zu geben an denen 0 Lehrkräfte tätig sind. Entweder ist das ein Fehler bei der Dateneingabe oder es handelt sich um Schulen mit einer Sonderrolle. Wenn die Anzahl sich auf einem niedrigem Niveau bewegen, sollten solche Fälle aus dem Datensatz entfernt werden:</p>
 <pre class="r"><code>## Anteil der Fälle mit 0 Lehrkräften
 sum(schulen.num[schulen.num$lehrkraefte==0,]$schueler_innen)/sum(schulen.num$schueler_innen)</code></pre>
 <pre><code>## [1] 1.069081e-05</code></pre>
 <pre class="r"><code>## Diese Merkmalsausprägung scheint die absolute Aussnahme darzustellen,
 ## diese Fälle können deshalb entfernt werden
 schulen.num &lt;- schulen.num[which(schulen.num$lehrkraefte &gt; 0), ]</code></pre>
-<p>Der Text- und der numerische Datensatz können nun wieder zusammengesetzt werden. Da aus dem numerischen Datensatz Fälle entfernt wurden, sind beide Datensätze nicht mehr identisch lang. Ein Matching über die Indexvariablen in den beiden Datensätzen erlaubt jedoch ein leichtes zusammmensetzten:</p>
+<p>Der Text- und der numerische Datensatz können jetzt wieder zusammengesetzt werden. Da aus dem numerischen Datensatz Fälle entfernt wurden, sind beide Datensätze nicht mehr identisch lang. Ein Matching über die Indexvariablen in den beiden Datensätzen erlaubt jedoch eine leichtes zusammmenführung:</p>
 <pre class="r"><code>dim(schulen.text)[1] == dim(schulen.num)[1]</code></pre>
 <pre><code>## [1] FALSE</code></pre>
 <pre class="r"><code>## Matching mittels der erstellten Indezes
@@ -372,16 +376,110 @@ stopifnot(as.numeric(schulen.nrw$idx.chr) == schulen.nrw$idx.num)</code></pre>
 </div>
 <div id="datenanalyse" class="section level2">
 <h2>Datenanalyse</h2>
-<p>Die Datenbereinigung nimmt oftmals wesentlich mehr Zeit in Anspruch als die eigentliche Analyse. Bei diesem Datensatz war der Aufwand jedoch überschaubar, da es sich hierbei amtliche Daten handelt, die Vorfeld in den jeweiligen Ämtern bzw. Institutionen bearbeitet werden.</p>
-<p>Die wichtigste Frage bei OpenData-Tabellen wie diesen ist, ob relevante Informationen vorhanden sind, die für ein Reporting in Frage kommen. Die Relation von Schülerinnen und Schülern zu den Lehrkräften wird als ein Indikator zur Lehrkräfteverteilung herangezogen. Beide Informationen sind in diesem Datensatz vorhanden und können für ein Reporting genutzt:</p>
+<p>Die Datenbereinigung nimmt oftmals wesentlich mehr Zeit in Anspruch als die eigentliche Analyse. Bei diesem Datensatz war der Aufwand überschaubar, da es sich hierbei amtliche Daten handelt, die Vorfeld in den jeweiligen Ämtern bzw. Institutionen bearbeitet wurden.</p>
+<p>Die wichtigste Frage bei OpenData-Tabellen wie diesen ist, ob relevante Informationen vorhanden sind, die für ein Reporting in Frage kommen. Die Relation von SuS zu den Lehrkräften wird als ein Indikator zur Lehrkräfteverteilung herangezogen. Beide Informationen sind in diesem Datensatz vorhanden.</p>
 <pre class="r"><code>schulen.nrw$lehr.distri &lt;- schulen.nrw$schueler_innen/schulen.nrw$lehrkraefte
 summary(schulen.nrw$lehr.distri)</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   2.778  10.367  12.118  12.531  14.727  28.589</code></pre>
-<pre class="r"><code>## Am besten lässt sich die Verteilung mit einem Historgrammm visualisieren.
-hist(schulen.nrw$lehr.distri, col=&#39;#000000&#39;, border=&#39;white&#39;, freq=FALSE, ylim=c(0,.15))
-lines(density(schulen.nrw$lehr.distri),  col=&#39;darkgrey&#39;)</code></pre>
-<p><img src="/post/2018-03-26-verwendung-des-reporters-pakets_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Lehrkräfte in NRW haben in der betrachteten Zeitspanne durchschnittlich 12 SuS betreut. Dreiviertel der Lehrkräfte waren hierbei für 14 oder weniger SuS zuständig. Die komplette Verteilung des Betreuungsverhältnis lässt sich hierbei am besten mit einem Histogramm visualisieren.</p>
+</div>
+<div id="erstellen-von-grafiken" class="section level2">
+<h2>Erstellen von Grafiken</h2>
+<pre class="r"><code>hist(schulen.nrw$lehr.distri
+     , col=&#39;#000000&#39;
+     , border=&#39;white&#39;
+     , freq=FALSE
+     , ylim=c(0,.15)
+     , main=&#39;Lehrkräfte pro SuS in NRW&#39;
+     , xlab=&#39;&#39;)
+lines(density(schulen.nrw$lehr.distri)
+      ,  col=&#39;darkgrey&#39;) # Glättung des Histogramms durch Gauß-Kernel</code></pre>
+<p><img src="/post/2018-03-26-verwendung-des-reporters-pakets_files/figure-html/unnamed-chunk-8-1.png" width="672" /> Das Histogramm gibt ein allgemeinen Überblick über das Betreuungsverhältnis im Betrachtungintervall. Es wird erkennbar, dass die meisten SuS in NRW von 10 bis 15 Lehrkräften betreut werden.</p>
+<p>Einen informativeren Überblick kann die Aufteilung des Datensatzes nach Schulform liefern. Hierfür wird der Datensatz in disjunkte Partitionen unterteilt.</p>
+<pre class="r"><code>schulen.nrw.schulform &lt;- split(schulen.nrw, schulen.nrw$schulform_text)
+length(schulen.nrw.schulform) ## Anzahl der Partitionen/Datensätze</code></pre>
+<pre><code>## [1] 13</code></pre>
+<pre class="r"><code>## Plotten der Histogramme in der Konsole
+##lapply(names(schulen.nrw.schulform),
+##                                    function(x){
+##                                    invisible(hist(schulen.nrw.schulform[[x]]$lehr.distri
+##                                       , col=&#39;#000000&#39;
+##                                       , border=&#39;white&#39;
+##                                       , freq=FALSE
+##                                       , ylim=c(0,.15)
+##                                       , main=paste(x, &#39;Lehrkräfte pro SuS in NRW&#39;, sep=&#39;-&#39;)
+##                                       , xlab=&#39;&#39;))
+##                                    lines(density(schulen.nrw.schulform[[x]]$lehr.distri)
+##                                        ,  col=&#39;darkgrey&#39;)
+##                                              }
+##       )</code></pre>
+</div>
+<div id="erstellen-der-powerpoint-prasentation" class="section level2">
+<h2>Erstellen der PowerPoint-Präsentation</h2>
+<p>Das <strong>officer</strong> und <strong>rvg</strong> Paket machen es nun möglich die Histogramme der verschiedenen Partitionen direkt in eine PowerPoint-Präsi zu überführen.</p>
+<pre class="r"><code>## Funktion zum schreiben der Historgramme 
+histo &lt;- function(x){hist(x
+                          , col=&#39;#000000&#39;
+                          , border=&#39;white&#39;
+                          , freq=FALSE
+                          , ylim=c(0,.3)
+                          , xlab=NULL
+                          , main=NULL
+                          )
+                      lines(density(x),
+                            col=&#39;darkgrey&#39;)
+                        }
+
+doc &lt;- read_pptx() # Erzeugen einer initialen PowerPoint-Folie; verwendung eines Master ist möglich
+## Schleife für den pptx Output 
+for(i in names(schulen.nrw.schulform) ){
+    doc &lt;- add_slide(doc, layout = &quot;Title and Content&quot;, master = &quot;Office Theme&quot;) ## Typ der PowerPointfolie festlegen
+    doc &lt;- ph_with_text(doc,  paste(i, &#39;Lehrkräfte pro SuS in NRW&#39;, sep=&#39;-&#39;))    ## Folientitel erzeugen
+    doc &lt;- ph_with_vg(doc                                                        ## Folientitel verwenden um Vektorgrafik zu erzeugen
+               , code = histo(schulen.nrw.schulform[[i]]$lehr.distri)            ## als Abbildung wird das jeweilige historgramm
+               , type = &quot;body&quot;)                                                  ## verwendet mit der vorher defniert funktion
+    
+}
+print(doc, &#39;/home/alex/Downloads/betreuung.pptx&#39; ) ## Ausgabe der PPTX am angegebenem LOKALEM Speicherpfad</code></pre>
+<pre><code>## [1] &quot;/home/alex/Downloads/betreuung.pptx&quot;</code></pre>
+<p>Ohne viel Aufwand kann hiermit ein automatisiertes Reporting durchgeführt werden. Je nach Datensatz ist sogar eine weitere Partitionierung möglich, so dass noch differenzierter gearbeitet werden kann. Es lassen sich darüber hinaus die verschiedensten Tabellen mit dem <a href="https://davidgohel.github.io/officer/articles/offcran/tables.html">officer</a> Paket erstellen.</p>
+<p>Das wichtigste bei diesem Workflow ist jedoch dass die beschriebenen Fallstricke, vermieden werden, da kein Im und Export in MS-Office durchgeführt werden muss, sondern alles innerhalb einer Anwendung bearbeitet werden kann.</p>
+<div id="addendum-zur-reporduktion" class="section level3">
+<h3>Addendum zur Reporduktion:</h3>
+<pre><code>## R version 3.4.4 (2018-03-15)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 16.04.4 LTS
+## 
+## Matrix products: default
+## BLAS: /usr/lib/openblas-base/libblas.so.3
+## LAPACK: /usr/lib/libopenblasp-r0.2.18.so
+## 
+## locale:
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=de_DE.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=de_DE.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=de_DE.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=de_DE.UTF-8 LC_IDENTIFICATION=C       
+## 
+## attached base packages:
+## [1] methods   stats     graphics  grDevices utils     datasets  base     
+## 
+## other attached packages:
+## [1] gdtools_0.1.7 officer_0.2.2 rvg_0.1.8    
+## 
+## loaded via a namespace (and not attached):
+##  [1] Rcpp_0.12.15      bookdown_0.7      digest_0.6.15    
+##  [4] rprojroot_1.3-2   R.methodsS3_1.7.1 R6_2.2.2         
+##  [7] backports_1.1.2   magrittr_1.5      evaluate_0.10.1  
+## [10] zip_1.0.0         blogdown_0.5      stringi_1.1.6    
+## [13] uuid_0.1-2        R.oo_1.21.0       R.utils_2.6.0    
+## [16] xml2_1.2.0        rmarkdown_1.9     tools_3.4.4      
+## [19] stringr_1.3.0     xfun_0.1          yaml_2.1.17      
+## [22] compiler_3.4.4    base64enc_0.1-3   htmltools_0.3.6  
+## [25] knitr_1.20</code></pre>
+</div>
 </div>
 </div>
 
@@ -619,14 +717,14 @@ lines(density(schulen.nrw$lehr.distri),  col=&#39;darkgrey&#39;)</code></pre>
             
             <div class="media-body">
               <a class="link-unstyled" href="/2018/03/verwendung-des-reporters-pakets/">
-                <h3 class="media-heading">Verwendung des ReporteRs-Pakets</h3>
+                <h3 class="media-heading">Von der Datenquelle zur PowerPointPräsi in einer Anwendung</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
                   Mar 3, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">Die Verwendung des “ReporteRs” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.
+              <div class="media-content hide-xs font-merryweather">Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.
 Workflow  Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
 Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Ergebnisse als .csv oder .xls in R Erstellung von Grafiken bzw.</div>
             </div>

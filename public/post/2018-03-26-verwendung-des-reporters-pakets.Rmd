@@ -1,5 +1,5 @@
 ---
-title: Verwendung des ReporteRs-Pakets
+title: Von der Datenquelle zur PowerPointPräsi in einer Anwendung
 author: Alexander Balko
 date: '2018-03-26'
 slug: verwendung-des-reporters-pakets
@@ -10,7 +10,7 @@ tags:
 ---
 
 
-Die Verwendung des "ReporteRs" Pakets ist für Anwender sinnvoll,
+Die Verwendung des "officer" Pakets ist für Anwender sinnvoll,
 die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht.
 Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw.
 Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.
@@ -43,11 +43,14 @@ Ein Paket, welches Schritt 1 bis 5 in **R** durchführbar macht, würde die meis
 Fehler die sich aus den Fallstricken ergeben, vermeiden und ein
 automatisiertes Reporting erlauben. Gleichzeitig wären die Ergebnisse
 (je nach Verfügbarkeit der Daten) reproduzierbar und das Vorgehen des Autors dokumentiert.
-Das R-Paket "ReporteRs" von Dave Gohel bietet diese Funktion und kann über CRAN bezogen werden:
+Das R-Paket "officer" von [Dave Gohel](https://davidgohel.github.io/officer/index.html)
+bietet diese Funktion und kann über CRAN bezogen werden:
 
 ```{r, echo=TRUE, eval=FALSE}
-install.packages('ReporteRs')
-library(ReporteRs)
+install.packages('officer')
+install.packages('rvg')
+library(officer)
+library(rvg)
 ```
 
 Vom Datenmanagement bis hin zur Erstellung der PowerPoint-Präsentation ist nun der komplette
@@ -59,16 +62,16 @@ anhand der Schülerdaten aus NRW gezeigt werden.
 Die Daten können unter folgendem Befehl geladen werden:
 
 ```{r, echo=TRUE, eval=TRUE}
-schulen.nrw <- read.table('/home/alex/Downloads/OpenData_Eckdaten.csv'
-                          , header=TRUE
-                          , sep=';'
-                          , stringsAsFactors=FALSE
-                          , dec=','
-                          , fileEncoding= 'WINDOWS-1252')
+schulen.nrw <- read.table('https://www.schulministerium.nrw.de/docs/bp/Ministerium/Open_MSB/Open_Data/FAQ-Eckdaten/OpenData_Eckdaten.csv'
+                   , header=TRUE
+                   , sep=';'
+                   , stringsAsFactors=FALSE
+                   , dec=','
+                   , fileEncoding= 'WINDOWS-1252')
 str(schulen.nrw)
 ```
-Die Daten Erfassen die Anzahl der Schüler und Schülerinnen, Klassen, Lehrkräfte und die erteilten
-Stunden aggregiert auf Kreisebene in NRW. Da in dieser Betrachtung nur öffentliche Schulen untersucht werden sollen, können die privaten Schulen aus dem Datensatz entfernt werden.
+Die Daten Erfassen die Anzahl der Schüler und Schülerinnen (SuS), Klassen, Lehrkräfte und die erteilten
+Stunden aggregiert auf Kreisebene in NRW. Da in dieser Betrachtung nur öffentliche Schulen untersucht werden sollen, werden die privaten Schulen aus dem Datensatz entfernt.
 Gleichzeitig ist aus dem Listing vorher erkennbar, dass die Textvariablen des Datensatzes
 unnötige Umbrüche und Leerstellen enthalten, diese sollten vor der Analyse entfernt werden:
 ```{r, echo=TRUE, eval=TRUE}
@@ -92,7 +95,9 @@ schulen.text <- schulen.nrw[schulen.text %in% TRUE]
 schulen.text <- sapply(schulen.text, function(x){
   x <- gsub("(?<=[\\s])\\s*|^\\s+|\\s+$", "",perl=TRUE, x)
   return(x)
-})
+    }
+  )
+
 schulen.text <- as.data.frame(schulen.text)
 ```
 
@@ -105,7 +110,7 @@ apply(schulen.num , 2, summary)
 Bei der Variable "lehrkräfte" scheint es Fälle zu geben an denen
 0 Lehrkräfte tätig sind. Entweder ist das ein Fehler bei der Dateneingabe
 oder es handelt sich um Schulen mit einer Sonderrolle.
-Wenn die Anzahl dieser Fälle gering, sollten solche Fälle aus dem Datensatz
+Wenn die Anzahl sich auf einem niedrigem Niveau bewegen, sollten solche Fälle aus dem Datensatz
 entfernt werden:
 ```{r, echo=TRUE, eval=TRUE}
 ## Anteil der Fälle mit 0 Lehrkräften
@@ -114,10 +119,10 @@ sum(schulen.num[schulen.num$lehrkraefte==0,]$schueler_innen)/sum(schulen.num$sch
 ## diese Fälle können deshalb entfernt werden
 schulen.num <- schulen.num[which(schulen.num$lehrkraefte > 0), ]
 ```
-Der Text- und der numerische Datensatz können nun wieder zusammengesetzt werden.
+Der Text- und der numerische Datensatz können jetzt wieder zusammengesetzt werden.
 Da aus dem numerischen Datensatz Fälle entfernt wurden, sind beide Datensätze nicht
 mehr identisch lang. Ein Matching über die Indexvariablen in den beiden Datensätzen
-erlaubt jedoch ein leichtes zusammmensetzten:
+erlaubt jedoch eine leichtes zusammmenführung:
 ```{r, eval=TRUE, echo=TRUE}
 dim(schulen.text)[1] == dim(schulen.num)[1]
 ## Matching mittels der erstellten Indezes
@@ -135,21 +140,115 @@ stopifnot(as.numeric(schulen.nrw$idx.chr) == schulen.nrw$idx.num)
 
 ## Datenanalyse
 Die Datenbereinigung nimmt oftmals wesentlich mehr Zeit in Anspruch als
-die eigentliche Analyse. Bei diesem Datensatz war der Aufwand jedoch
+die eigentliche Analyse. Bei diesem Datensatz war der Aufwand
 überschaubar, da es sich hierbei amtliche Daten handelt, die Vorfeld
-in den jeweiligen Ämtern bzw. Institutionen bearbeitet werden.
+in den jeweiligen Ämtern bzw. Institutionen bearbeitet wurden.
 
 Die wichtigste Frage bei OpenData-Tabellen wie diesen ist, ob relevante
 Informationen vorhanden sind, die für ein Reporting in Frage kommen.
-Die Relation von Schülerinnen und Schülern zu den Lehrkräften wird als
+Die Relation von SuS zu den Lehrkräften wird als
 ein Indikator zur Lehrkräfteverteilung herangezogen. Beide Informationen
-sind in diesem Datensatz vorhanden und können für ein Reporting genutzt:
+sind in diesem Datensatz vorhanden. 
 
-```{r, eval=TRUE, echo=TRUE}
+```{r}
 schulen.nrw$lehr.distri <- schulen.nrw$schueler_innen/schulen.nrw$lehrkraefte
 summary(schulen.nrw$lehr.distri)
-## Am besten lässt sich die Verteilung mit einem Historgrammm visualisieren.
-hist(schulen.nrw$lehr.distri, col='#000000', border='white', freq=FALSE, ylim=c(0,.15))
-lines(density(schulen.nrw$lehr.distri),  col='darkgrey')
 ```
+Lehrkräfte in NRW haben in der betrachteten Zeitspanne durchschnittlich 12 SuS betreut.
+Dreiviertel der Lehrkräfte waren hierbei für 14 oder weniger SuS zuständig.
+Die komplette Verteilung des Betreuungsverhältnis lässt sich hierbei am
+besten mit einem Histogramm visualisieren.
+
+
+## Erstellen von Grafiken
+```{r, eval=TRUE, echo=TRUE}
+hist(schulen.nrw$lehr.distri
+     , col='#000000'
+     , border='white'
+     , freq=FALSE
+     , ylim=c(0,.15)
+     , main='Lehrkräfte pro SuS in NRW'
+     , xlab='')
+lines(density(schulen.nrw$lehr.distri)
+      ,  col='darkgrey') # Glättung des Histogramms durch Gauß-Kernel
+```
+Das Histogramm gibt ein allgemeinen Überblick
+über das Betreuungsverhältnis im Betrachtungintervall.
+Es wird erkennbar, dass die meisten SuS in NRW
+von 10 bis 15 Lehrkräften betreut werden.
+
+Einen informativeren Überblick kann die Aufteilung des
+Datensatzes nach Schulform liefern. Hierfür wird
+der Datensatz in disjunkte Partitionen unterteilt.
+```{r, eval=TRUE}
+schulen.nrw.schulform <- split(schulen.nrw, schulen.nrw$schulform_text)
+length(schulen.nrw.schulform) ## Anzahl der Partitionen/Datensätze
+## Plotten der Histogramme in der Konsole
+##lapply(names(schulen.nrw.schulform),
+##                                    function(x){
+##                                    invisible(hist(schulen.nrw.schulform[[x]]$lehr.distri
+##                                       , col='#000000'
+##                                       , border='white'
+##                                       , freq=FALSE
+##                                       , ylim=c(0,.15)
+##                                       , main=paste(x, 'Lehrkräfte pro SuS in NRW', sep='-')
+##                                       , xlab=''))
+##                                    lines(density(schulen.nrw.schulform[[x]]$lehr.distri)
+##                                        ,  col='darkgrey')
+##                                              }
+##       )
+```
+
+```{r, echo=FALSE, eval=TRUE}
+library(rvg)
+library(officer)
+```
+## Erstellen der PowerPoint-Präsentation
+Das **officer** und **rvg** Paket machen es nun möglich die Histogramme der verschiedenen
+Partitionen direkt in eine PowerPoint-Präsi zu überführen. 
+```{r}
+## Funktion zum schreiben der Historgramme 
+histo <- function(x){hist(x
+                          , col='#000000'
+                          , border='white'
+                          , freq=FALSE
+                          , ylim=c(0,.3)
+                          , xlab=NULL
+                          , main=NULL
+                          )
+                      lines(density(x),
+                            col='darkgrey')
+                        }
+
+doc <- read_pptx() # Erzeugen einer initialen PowerPoint-Folie; verwendung eines Master ist möglich
+## Schleife für den pptx Output 
+for(i in names(schulen.nrw.schulform) ){
+    doc <- add_slide(doc, layout = "Title and Content", master = "Office Theme") ## Typ der PowerPointfolie festlegen
+    doc <- ph_with_text(doc,  paste(i, 'Lehrkräfte pro SuS in NRW', sep='-'))    ## Folientitel erzeugen
+    doc <- ph_with_vg(doc                                                        ## Folientitel verwenden um Vektorgrafik zu erzeugen
+               , code = histo(schulen.nrw.schulform[[i]]$lehr.distri)            ## als Abbildung wird das jeweilige historgramm
+               , type = "body")                                                  ## verwendet mit der vorher defniert funktion
+    
+}
+print(doc, '/home/alex/Downloads/betreuung.pptx' ) ## Ausgabe der PPTX am angegebenem LOKALEM Speicherpfad
+
+```
+Ohne viel
+Aufwand kann hiermit ein automatisiertes Reporting durchgeführt werden.
+Je nach Datensatz ist sogar eine weitere Partitionierung möglich,
+so dass noch differenzierter gearbeitet werden kann.
+Es lassen sich darüber hinaus die verschiedensten Tabellen mit dem [officer](https://davidgohel.github.io/officer/articles/offcran/tables.html) Paket 
+erstellen. 
+
+Das wichtigste bei diesem Workflow ist jedoch dass die beschriebenen Fallstricke,
+vermieden werden, da kein Im und Export in MS-Office durchgeführt werden muss, sondern
+alles innerhalb einer Anwendung bearbeitet werden kann.
+
+
+### Addendum zur Reporduktion:
+```{r,echo=FALSE, eval=TRUE}
+sessionInfo()
+```
+
+
 
