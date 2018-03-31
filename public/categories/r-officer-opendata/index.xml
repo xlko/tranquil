@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Alexander Balko</title>
-    <link>/</link>
-    <description>Recent content on Alexander Balko</description>
+    <title>R Officer Opendata on Alexander Balko</title>
+    <link>/categories/r-officer-opendata/</link>
+    <description>Recent content in R Officer Opendata on Alexander Balko</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 26 Mar 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/r-officer-opendata/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,16 +20,6 @@
       <description>Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art Arbeitsablauf häufig zu.
 Workflow  Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
 Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Ergebnisse als .csv oder .xls in R Erstellung von Grafiken bzw.</description>
-    </item>
-    
-    <item>
-      <title>Einleitung in den Blog</title>
-      <link>/2018/03/einleitung/</link>
-      <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/03/einleitung/</guid>
-      <description>Dieser Blog widmet sich den unterschiedlichsten Themen rund um den Bereich Datenanalyse. Die Blogbeiträge werden hierbei vornehmlich die Programmiersprache R nutzen, um die unterschiedlichsten Fragestellungen zu untersuchen. 
-Warum R? Die Verwendung von R ergibt sich in diesem Kontext aus meinem CV, da es meine native Programmiersprache ist. Einige Beiträge werden auch andere Sprachen wie Python oder Julia verwenden, falls die Kompatibilität mit anderen Sprachen oder Software einen effizienteren Workflow verspricht.</description>
     </item>
     
   </channel>

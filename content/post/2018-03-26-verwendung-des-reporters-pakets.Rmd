@@ -1,10 +1,13 @@
 ---
-title: Von der Datenquelle zur PowerPointPräsi in einer Anwendung
+title: Von der Datenquelle zur PowerPoint-Präsi in einer Anwendung
 author: Alexander Balko
 date: '2018-03-26'
 slug: verwendung-des-reporters-pakets
+thumbnailImagePosition: "left"
+thumbnailImage: https://unsplash.com/photos/u2Ru4QBXA5Q
+
 categories:
-  - R ReporteRs OpenData
+  - R officer rvg OpenData
 tags:
   - R Pakete
 ---
@@ -13,9 +16,9 @@ tags:
 Die Verwendung des "officer" Pakets ist für Anwender sinnvoll,
 die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht.
 Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw.
-Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.
+Berichterstattung für Einheiten auf Leitungsebene trifft diese Art Arbeitsablauf häufig zu.
 
-# Workflow
+## Workflow
 <!--more-->
 
 Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
@@ -28,12 +31,12 @@ Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
   
 Selbstverständlich kann Schritt drei auch in **R** erledigt werden.
 Dieser Workflow ist jedoch meines Erachtens aus folgenden Gründen mit einigen
-Mängeln versehen.
+Fallstricken versehen.
 
-# Fallstricke
+## Fallstricke
 
 - Gerade beim copy/paste von langen Zahlenkolonnen schleichen sich immer wieder
-  Fehler ein, da Bezüge falsch kopiert  oder Zeilen/Spalten übersehen werden
+  Fehler ein, da Bezüge falsch kopiert oder Zeilen/Spalten übersehen werden
 - Schritt 4 und 5 können als eine Art "Blackbox" für weitere Nutzer betrachtet werden,
   da das Vorgehen des Autors beim Erstellen der Grafiken und Präsentation nicht
   dokumentiert wird
@@ -109,7 +112,7 @@ apply(schulen.num , 2, summary)
 ```
 Bei der Variable "lehrkräfte" scheint es Fälle zu geben an denen
 0 Lehrkräfte tätig sind. Entweder ist das ein Fehler bei der Dateneingabe
-oder es handelt sich um Schulen mit einer Sonderrolle.
+oder es handelt sich um Schulen mit einer Sonderfunktion.
 Wenn die Anzahl sich auf einem niedrigem Niveau bewegen, sollten solche Fälle aus dem Datensatz
 entfernt werden:
 ```{r, echo=TRUE, eval=TRUE}
@@ -205,7 +208,7 @@ library(officer)
 ```
 ## Erstellen der PowerPoint-Präsentation
 Das **officer** und **rvg** Paket machen es nun möglich die Histogramme der verschiedenen
-Partitionen direkt in eine PowerPoint-Präsi zu überführen. 
+Partitionen direkt in eine PowerPoint-Präsi zu überführen.
 ```{r}
 ## Funktion zum schreiben der Historgramme 
 histo <- function(x){hist(x
@@ -230,22 +233,32 @@ for(i in names(schulen.nrw.schulform) ){
                , type = "body")                                                  ## verwendet mit der vorher defniert funktion
     
 }
-print(doc, '/home/alex/Downloads/betreuung.pptx' ) ## Ausgabe der PPTX am angegebenem LOKALEM Speicherpfad
+print(doc, '/home/xanbono/Downloads/betreuung.pptx' ) ## Ausgabe der PPTX am angegebenem LOKALEM Speicherpfad
 
 ```
 Ohne viel
 Aufwand kann hiermit ein automatisiertes Reporting durchgeführt werden.
-Je nach Datensatz ist sogar eine weitere Partitionierung möglich,
-so dass noch differenzierter gearbeitet werden kann.
-Es lassen sich darüber hinaus die verschiedensten Tabellen mit dem [officer](https://davidgohel.github.io/officer/articles/offcran/tables.html) Paket 
+Je nach Variable ist sogar eine weitere Partitionierung möglich,
+so dass noch differenziertere Auswertungen erfolgen können.
+So wäre es möglich das Betreuungsverhältnis in den jeweiligen Regierungsbezirken
+darzustellen.
+Neben der Darstellung von Grafiken
+lassen sich mit dem **officer** 
+Paket auch die verschiedenste [Tabellen](https://davidgohel.github.io/officer/articles/offcran/tables.html)
 erstellen. 
 
-Das wichtigste bei diesem Workflow ist jedoch dass die beschriebenen Fallstricke,
-vermieden werden, da kein Im und Export in MS-Office durchgeführt werden muss, sondern
-alles innerhalb einer Anwendung bearbeitet werden kann.
+Das wichtigste bei diesem Workflow ist jedoch m.E. dass die beschriebenen Fallstricke,
+vermieden werden. Ein Im/Export in MS-Office wird obsolet,
+dies führt dazu, dass keine Daten mehr unterschlagen werden.
+Darüber hinaus wird die Blackbox beim erstellen von PowerPoint-Präsentation
+aufgebrochen, da die Erzeugung der Grafiken und Tabellen nun im R-Skript
+dokumentiert wird. Der riesige Zeitgewinn der dadurch entsteht, da nun
+viel weniger Zeit für das "Powerpoint-Engineering" aufgewendet ist ein
+weiterer großer Pluspunkt der das arbeiten mit dem **officer** Paket
+attraktiv macht.
 
 
-### Addendum zur Reporduktion:
+### Addendum zur Reproduktion:
 ```{r,echo=FALSE, eval=TRUE}
 sessionInfo()
 ```

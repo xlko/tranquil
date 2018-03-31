@@ -1,19 +1,22 @@
 ---
-title: Von der Datenquelle zur PowerPointPräsi in einer Anwendung
+title: Von der Datenquelle zur PowerPoint-Präsi in einer Anwendung
 author: Alexander Balko
 date: '2018-03-26'
 slug: verwendung-des-reporters-pakets
+thumbnailImagePosition: "left"
+thumbnailImage: https://unsplash.com/photos/u2Ru4QBXA5Q
+
 categories:
-  - R ReporteRs OpenData
+  - R officer rvg OpenData
 tags:
   - R Pakete
 ---
 
 
 
-<p>Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art von Verwendung häufig zu.</p>
-<div id="workflow" class="section level1">
-<h1>Workflow</h1>
+<p>Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art Arbeitsablauf häufig zu.</p>
+<div id="workflow" class="section level2">
+<h2>Workflow</h2>
 <!--more-->
 <p>Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:</p>
 <ol style="list-style-type: decimal">
@@ -23,10 +26,10 @@ tags:
 <li>Import der Grafiken und Tabellen in PowerPoint</li>
 <li>Erstellen der PowerPoint-Präsentation</li>
 </ol>
-<p>Selbstverständlich kann Schritt drei auch in <strong>R</strong> erledigt werden. Dieser Workflow ist jedoch meines Erachtens aus folgenden Gründen mit einigen Mängeln versehen.</p>
+<p>Selbstverständlich kann Schritt drei auch in <strong>R</strong> erledigt werden. Dieser Workflow ist jedoch meines Erachtens aus folgenden Gründen mit einigen Fallstricken versehen.</p>
 </div>
-<div id="fallstricke" class="section level1">
-<h1>Fallstricke</h1>
+<div id="fallstricke" class="section level2">
+<h2>Fallstricke</h2>
 <ul>
 <li>Gerade beim copy/paste von langen Zahlenkolonnen schleichen sich immer wieder Fehler ein, da Bezüge falsch kopiert oder Zeilen/Spalten übersehen werden</li>
 <li>Schritt 4 und 5 können als eine Art “Blackbox” für weitere Nutzer betrachtet werden, da das Vorgehen des Autors beim Erstellen der Grafiken und Präsentation nicht dokumentiert wird</li>
@@ -38,6 +41,7 @@ install.packages(&#39;rvg&#39;)
 library(officer)
 library(rvg)</code></pre>
 <p>Vom Datenmanagement bis hin zur Erstellung der PowerPoint-Präsentation ist nun der komplette Workflow in <strong>R</strong> durchführbar. Die Umsetzung dieses Workflows soll exemplarisch anhand der Schülerdaten aus NRW gezeigt werden.</p>
+</div>
 <div id="datenmanagement-und--bereinigung" class="section level2">
 <h2>Datenmanagement und -bereinigung</h2>
 <p>Die Daten können unter folgendem Befehl geladen werden:</p>
@@ -92,21 +96,21 @@ schulen.text &lt;- as.data.frame(schulen.text)</code></pre>
 <pre class="r"><code>schulen.num &lt;- sapply(schulen.nrw, is.numeric)
 schulen.num &lt;- schulen.nrw[schulen.num %in% TRUE]
 apply(schulen.num , 2, summary)</code></pre>
-<pre><code>##             jahr schulform regierungsbezirk    kreis   schulen
-## Min.    2012.000   2.00000          1.00000 111.0000   1.00000
-## 1st Qu. 2013.000   8.00000          1.00000 166.0000   3.00000
-## Median  2014.000  14.00000          5.00000 513.0000   7.00000
-## Mean    2014.015  14.53666          4.69788 514.0733  12.29505
-## 3rd Qu. 2015.000  20.00000          7.00000 774.0000  12.00000
-## Max.    2016.000  88.00000          9.00000 978.0000 142.00000
-##         schueler_innen   klassen lehrkraefte ert_stunden idx.num
-## Min.            13.000    2.0000      0.0000       43.00    1.00
-## 1st Qu.       1256.250   66.7500    148.0000     2805.18  566.75
-## Median        3701.000  139.0000    317.0000     5716.45 1132.50
-## Mean          5205.754  206.7906    394.3883     7163.17 1132.50
-## 3rd Qu.       7693.500  268.0000    521.0000     9468.25 1698.25
-## Max.         39709.000 1919.0000   2806.0000    51531.00 2264.00</code></pre>
-<p>Bei der Variable “lehrkräfte” scheint es Fälle zu geben an denen 0 Lehrkräfte tätig sind. Entweder ist das ein Fehler bei der Dateneingabe oder es handelt sich um Schulen mit einer Sonderrolle. Wenn die Anzahl sich auf einem niedrigem Niveau bewegen, sollten solche Fälle aus dem Datensatz entfernt werden:</p>
+<pre><code>##         jahr schulform regierungsbezirk kreis schulen schueler_innen
+## Min.    2012      2.00            1.000 111.0     1.0             13
+## 1st Qu. 2013      8.00            1.000 166.0     3.0           1256
+## Median  2014     14.00            5.000 513.0     7.0           3701
+## Mean    2014     14.54            4.698 514.1    12.3           5206
+## 3rd Qu. 2015     20.00            7.000 774.0    12.0           7694
+## Max.    2016     88.00            9.000 978.0   142.0          39710
+##         klassen lehrkraefte ert_stunden idx.num
+## Min.       2.00         0.0          43     1.0
+## 1st Qu.   66.75       148.0        2805   566.8
+## Median   139.00       317.0        5716  1132.0
+## Mean     206.80       394.4        7163  1132.0
+## 3rd Qu.  268.00       521.0        9468  1698.0
+## Max.    1919.00      2806.0       51530  2264.0</code></pre>
+<p>Bei der Variable “lehrkräfte” scheint es Fälle zu geben an denen 0 Lehrkräfte tätig sind. Entweder ist das ein Fehler bei der Dateneingabe oder es handelt sich um Schulen mit einer Sonderfunktion. Wenn die Anzahl sich auf einem niedrigem Niveau bewegen, sollten solche Fälle aus dem Datensatz entfernt werden:</p>
 <pre class="r"><code>## Anteil der Fälle mit 0 Lehrkräften
 sum(schulen.num[schulen.num$lehrkraefte==0,]$schueler_innen)/sum(schulen.num$schueler_innen)</code></pre>
 <pre><code>## [1] 1.069081e-05</code></pre>
@@ -136,7 +140,7 @@ stopifnot(as.numeric(schulen.nrw$idx.chr) == schulen.nrw$idx.num)</code></pre>
 <pre class="r"><code>schulen.nrw$lehr.distri &lt;- schulen.nrw$schueler_innen/schulen.nrw$lehrkraefte
 summary(schulen.nrw$lehr.distri)</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   2.778  10.367  12.118  12.531  14.727  28.589</code></pre>
+##   2.778  10.370  12.120  12.530  14.730  28.590</code></pre>
 <p>Lehrkräfte in NRW haben in der betrachteten Zeitspanne durchschnittlich 12 SuS betreut. Dreiviertel der Lehrkräfte waren hierbei für 14 oder weniger SuS zuständig. Die komplette Verteilung des Betreuungsverhältnis lässt sich hierbei am besten mit einem Histogramm visualisieren.</p>
 </div>
 <div id="erstellen-von-grafiken" class="section level2">
@@ -196,24 +200,20 @@ for(i in names(schulen.nrw.schulform) ){
                , type = &quot;body&quot;)                                                  ## verwendet mit der vorher defniert funktion
     
 }
-print(doc, &#39;/home/alex/Downloads/betreuung.pptx&#39; ) ## Ausgabe der PPTX am angegebenem LOKALEM Speicherpfad</code></pre>
-<pre><code>## [1] &quot;/home/alex/Downloads/betreuung.pptx&quot;</code></pre>
-<p>Ohne viel Aufwand kann hiermit ein automatisiertes Reporting durchgeführt werden. Je nach Datensatz ist sogar eine weitere Partitionierung möglich, so dass noch differenzierter gearbeitet werden kann. Es lassen sich darüber hinaus die verschiedensten Tabellen mit dem <a href="https://davidgohel.github.io/officer/articles/offcran/tables.html">officer</a> Paket erstellen.</p>
-<p>Das wichtigste bei diesem Workflow ist jedoch dass die beschriebenen Fallstricke, vermieden werden, da kein Im und Export in MS-Office durchgeführt werden muss, sondern alles innerhalb einer Anwendung bearbeitet werden kann.</p>
-<div id="addendum-zur-reporduktion" class="section level3">
-<h3>Addendum zur Reporduktion:</h3>
-<pre><code>## R version 3.4.4 (2018-03-15)
+print(doc, &#39;/home/xanbono/Downloads/betreuung.pptx&#39; ) ## Ausgabe der PPTX am angegebenem LOKALEM Speicherpfad</code></pre>
+<pre><code>## [1] &quot;/home/xanbono/Downloads/betreuung.pptx&quot;</code></pre>
+<p>Ohne viel Aufwand kann hiermit ein automatisiertes Reporting durchgeführt werden. Je nach Variable ist sogar eine weitere Partitionierung möglich, so dass noch differenziertere Auswertungen erfolgen können. So wäre es möglich das Betreuungsverhältnis in den jeweiligen Regierungsbezirken darzustellen. Neben der Darstellung von Grafiken lassen sich mit dem <strong>officer</strong> Paket auch die verschiedenste <a href="https://davidgohel.github.io/officer/articles/offcran/tables.html">Tabellen</a> erstellen.</p>
+<p>Das wichtigste bei diesem Workflow ist jedoch m.E. dass die beschriebenen Fallstricke, vermieden werden. Ein Im/Export in MS-Office wird obsolet, dies führt dazu, dass keine Daten mehr unterschlagen werden. Darüber hinaus wird die Blackbox beim erstellen von PowerPoint-Präsentation aufgebrochen, da die Erzeugung der Grafiken und Tabellen nun im R-Skript dokumentiert wird. Der riesige Zeitgewinn der dadurch entsteht, da nun viel weniger Zeit für das “Powerpoint-Engineering” aufgewendet ist ein weiterer großer Pluspunkt der das arbeiten mit dem <strong>officer</strong> Paket attraktiv macht.</p>
+<div id="addendum-zur-reproduktion" class="section level3">
+<h3>Addendum zur Reproduktion:</h3>
+<pre><code>## R version 3.3.0 (2016-05-03)
 ## Platform: x86_64-pc-linux-gnu (64-bit)
 ## Running under: Ubuntu 16.04.4 LTS
 ## 
-## Matrix products: default
-## BLAS: /usr/lib/openblas-base/libblas.so.3
-## LAPACK: /usr/lib/libopenblasp-r0.2.18.so
-## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=de_DE.UTF-8        LC_COLLATE=en_US.UTF-8    
-##  [5] LC_MONETARY=de_DE.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [1] LC_CTYPE=de_DE.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=de_DE.UTF-8        LC_COLLATE=de_DE.UTF-8    
+##  [5] LC_MONETARY=de_DE.UTF-8    LC_MESSAGES=de_DE.UTF-8   
 ##  [7] LC_PAPER=de_DE.UTF-8       LC_NAME=C                 
 ##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
 ## [11] LC_MEASUREMENT=de_DE.UTF-8 LC_IDENTIFICATION=C       
@@ -225,15 +225,13 @@ print(doc, &#39;/home/alex/Downloads/betreuung.pptx&#39; ) ## Ausgabe der PPTX a
 ## [1] gdtools_0.1.7 officer_0.2.2 rvg_0.1.8    
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.15      bookdown_0.7      digest_0.6.15    
+##  [1] Rcpp_0.12.16      bookdown_0.7      digest_0.6.12    
 ##  [4] rprojroot_1.3-2   R.methodsS3_1.7.1 R6_2.2.2         
-##  [7] backports_1.1.2   magrittr_1.5      evaluate_0.10.1  
-## [10] zip_1.0.0         blogdown_0.5      stringi_1.1.6    
+##  [7] backports_1.0.5   magrittr_1.5      evaluate_0.10    
+## [10] zip_1.0.0         blogdown_0.5      stringi_1.1.5    
 ## [13] uuid_0.1-2        R.oo_1.21.0       R.utils_2.6.0    
-## [16] xml2_1.2.0        rmarkdown_1.9     tools_3.4.4      
-## [19] stringr_1.3.0     xfun_0.1          yaml_2.1.17      
-## [22] compiler_3.4.4    base64enc_0.1-3   htmltools_0.3.6  
-## [25] knitr_1.20</code></pre>
-</div>
+## [16] xml2_1.2.0        rmarkdown_1.9     tools_3.3.0      
+## [19] stringr_1.2.0     xfun_0.1          yaml_2.1.14      
+## [22] base64enc_0.1-3   htmltools_0.3.6   knitr_1.20</code></pre>
 </div>
 </div>

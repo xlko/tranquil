@@ -4,7 +4,7 @@ author: Alex
 date: '2018-03-20'
 slug: einleitung
 thumbnailImagePosition: "top"
-thumbnailImage: https://images.unsplash.com/photo-1442033025416-c6a7da752d71?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=cef630c526147d4b9ec3bfa747c632a9&auto=format&fit=crop&w=1359&q=80
+thumbnailImage: https://unsplash.com/photos/0nI1DczRQAM
 categories:
   - R
   - blogdown
