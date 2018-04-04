@@ -105,6 +105,7 @@ schulen.text <- as.data.frame(schulen.text)
 ```
 
 Nun müssen noch die numerischen Variablen kontrolliert werden:
+
 ```{r, eval=TRUE, echor=TRUE}
 schulen.num <- sapply(schulen.nrw, is.numeric)
 schulen.num <- schulen.nrw[schulen.num %in% TRUE]
@@ -113,8 +114,9 @@ apply(schulen.num , 2, summary)
 Bei der Variable "lehrkräfte" scheint es Fälle zu geben an denen
 0 Lehrkräfte tätig sind. Entweder ist das ein Fehler bei der Dateneingabe
 oder es handelt sich um Schulen mit einer Sonderfunktion.
-Wenn die Anzahl sich auf einem niedrigem Niveau bewegen, sollten solche Fälle aus dem Datensatz
+Wenn die Anzahl sich auf einem niedrigem Niveau bewegt, sollten solche Fälle aus dem Datensatz
 entfernt werden:
+
 ```{r, echo=TRUE, eval=TRUE}
 ## Anteil der Fälle mit 0 Lehrkräften
 sum(schulen.num[schulen.num$lehrkraefte==0,]$schueler_innen)/sum(schulen.num$schueler_innen)
@@ -122,10 +124,12 @@ sum(schulen.num[schulen.num$lehrkraefte==0,]$schueler_innen)/sum(schulen.num$sch
 ## diese Fälle können deshalb entfernt werden
 schulen.num <- schulen.num[which(schulen.num$lehrkraefte > 0), ]
 ```
+
 Der Text- und der numerische Datensatz können jetzt wieder zusammengesetzt werden.
 Da aus dem numerischen Datensatz Fälle entfernt wurden, sind beide Datensätze nicht
 mehr identisch lang. Ein Matching über die Indexvariablen in den beiden Datensätzen
 erlaubt jedoch eine leichtes zusammmenführung:
+
 ```{r, eval=TRUE, echo=TRUE}
 dim(schulen.text)[1] == dim(schulen.num)[1]
 ## Matching mittels der erstellten Indezes
@@ -144,7 +148,7 @@ stopifnot(as.numeric(schulen.nrw$idx.chr) == schulen.nrw$idx.num)
 ## Datenanalyse
 Die Datenbereinigung nimmt oftmals wesentlich mehr Zeit in Anspruch als
 die eigentliche Analyse. Bei diesem Datensatz war der Aufwand
-überschaubar, da es sich hierbei amtliche Daten handelt, die Vorfeld
+überschaubar, da es sich hierbei amtliche Daten handelt, die im Vorfeld
 in den jeweiligen Ämtern bzw. Institutionen bearbeitet wurden.
 
 Die wichtigste Frage bei OpenData-Tabellen wie diesen ist, ob relevante
@@ -176,7 +180,7 @@ lines(density(schulen.nrw$lehr.distri)
       ,  col='darkgrey') # Glättung des Histogramms durch Gauß-Kernel
 ```
 Das Histogramm gibt ein allgemeinen Überblick
-über das Betreuungsverhältnis im Betrachtungintervall.
+über das Betreuungsverhältnis im Beobachtungszeitraum.
 Es wird erkennbar, dass die meisten SuS in NRW
 von 10 bis 15 Lehrkräften betreut werden.
 
@@ -223,9 +227,9 @@ histo <- function(x){hist(x
                             col='darkgrey')
                         }
 
-doc <- read_pptx() # Erzeugen einer initialen PowerPoint-Folie; verwendung eines Master ist möglich
-## Schleife für den pptx Output 
-for(i in names(schulen.nrw.schulform) ){
+doc <- read_pptx() ## Erzeugen einer initialen PowerPoint-Folie;
+                   ## verwendung eines Folienmasters ist möglich  
+for(i in names(schulen.nrw.schulform) ){                                         ## Schleife für den pptx Output 
     doc <- add_slide(doc, layout = "Title and Content", master = "Office Theme") ## Typ der PowerPointfolie festlegen
     doc <- ph_with_text(doc,  paste(i, 'Lehrkräfte pro SuS in NRW', sep='-'))    ## Folientitel erzeugen
     doc <- ph_with_vg(doc                                                        ## Folientitel verwenden um Vektorgrafik zu erzeugen
@@ -233,7 +237,7 @@ for(i in names(schulen.nrw.schulform) ){
                , type = "body")                                                  ## verwendet mit der vorher defniert funktion
     
 }
-print(doc, '/home/xanbono/Downloads/betreuung.pptx' ) ## Ausgabe der PPTX am angegebenem LOKALEM Speicherpfad
+print(doc, '/home/alex/Downloads/betreuung.pptx' ) ## Ausgabe der PPTX am angegebenem LOKALEM Speicherpfad
 
 ```
 Ohne viel
@@ -249,12 +253,12 @@ erstellen.
 
 Das wichtigste bei diesem Workflow ist jedoch m.E. dass die beschriebenen Fallstricke,
 vermieden werden. Ein Im/Export in MS-Office wird obsolet,
-dies führt dazu, dass keine Daten mehr unterschlagen werden.
+dies führt dazu, dass keine Daten, durch fälschliches kopieren, unterschlagen werden.
 Darüber hinaus wird die Blackbox beim erstellen von PowerPoint-Präsentation
 aufgebrochen, da die Erzeugung der Grafiken und Tabellen nun im R-Skript
-dokumentiert wird. Der riesige Zeitgewinn der dadurch entsteht, da nun
-viel weniger Zeit für das "Powerpoint-Engineering" aufgewendet ist ein
-weiterer großer Pluspunkt der das arbeiten mit dem **officer** Paket
+dokumentiert wird. Der riesige Zeitgewinn der entsteht, da nun
+viel weniger Zeit für das "powerpoint-engineering" aufgewendet wird, ist ein
+weiterer großer Pluspunkt der das Arbeiten mit dem **officer** Paket
 attraktiv macht.
 
 
