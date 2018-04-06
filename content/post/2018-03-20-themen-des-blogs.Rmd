@@ -23,7 +23,7 @@ zu untersuchen.
 
 # Warum R?
 
-Die Verwendung von **R** ergibt sich in diesem Kontext
+Die Verwendung von **R** ergibt 
 aus meinem CV, da es meine native Programmiersprache ist.
 Einige Beiträge werden auch andere Sprachen wie [Python](https://pandas.pydata.org/) oder [Julia](https://julialang.org/) verwenden, falls die Kompatibilität mit anderen Sprachen oder Software
 einen effizienteren Workflow verspricht.
@@ -32,7 +32,7 @@ einen effizienteren Workflow verspricht.
 Die aktuelle [Debatte](https://www.r-bloggers.com/r-or-python-python-or-r-the-ongoing-debate/) in der *Data Science*-Community, ob es eine überlegene
 Sprache im Bereich der Datenanalyse gibt, ist m.E. nicht zielführend.
 Entscheidendes Kriterium hierfür sollte die zu bearbeitende Fragestellung sein.
-Die Wahl des Analyseinstruments sollte sich hieran ausrichten. In den meisten Fällen dürfte es sowieso keine Rolle spielen, welche Sprache verwendet wurde.
+Die Wahl des Analyseinstruments sollte sich daran ausrichten. In den meisten Fällen dürfte es sowieso keine Rolle spielen, welche Sprache verwendet wurde.
 
 Die Erstellung des Blogs ist mit den R-Paketen rmarkdown und
 blogdown erfolgt. Beide Pakete können mit folgenden Befehlen in der

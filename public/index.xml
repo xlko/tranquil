@@ -17,7 +17,7 @@
       <pubDate>Mon, 26 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/03/verwendung-des-reporters-pakets/</guid>
-      <description>Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art Arbeitsablauf häufig zu.
+      <description>Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen möchten an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art Arbeitsablauf häufig zu.
 Workflow  Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
 Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Ergebnisse als .csv oder .xls in R Erstellung von Grafiken bzw.</description>
     </item>
@@ -29,7 +29,8 @@ Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Er
       
       <guid>/2018/03/einleitung/</guid>
       <description>Dieser Blog widmet sich den unterschiedlichsten Themen rund um den Bereich Datenanalyse. Die Blogbeiträge werden hierbei vornehmlich die Programmiersprache R nutzen, um die unterschiedlichsten Fragestellungen zu untersuchen. 
-Warum R? Die Verwendung von R ergibt sich in diesem Kontext aus meinem CV, da es meine native Programmiersprache ist. Einige Beiträge werden auch andere Sprachen wie Python oder Julia verwenden, falls die Kompatibilität mit anderen Sprachen oder Software einen effizienteren Workflow verspricht.</description>
+Warum R? Die Verwendung von R ergibt aus meinem CV, da es meine native Programmiersprache ist. Einige Beiträge werden auch andere Sprachen wie Python oder Julia verwenden, falls die Kompatibilität mit anderen Sprachen oder Software einen effizienteren Workflow verspricht.
+Die aktuelle Debatte in der Data Science-Community, ob es eine überlegene Sprache im Bereich der Datenanalyse gibt, ist m.</description>
     </item>
     
   </channel>

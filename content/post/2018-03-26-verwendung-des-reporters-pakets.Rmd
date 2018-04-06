@@ -14,7 +14,7 @@ tags:
 
 
 Die Verwendung des "officer" Pakets ist für Anwender sinnvoll,
-die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht.
+die ein Reporting erstellen möchten an dessen Ende eine PowerPoint-Präsentation steht.
 Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw.
 Berichterstattung für Einheiten auf Leitungsebene trifft diese Art Arbeitsablauf häufig zu.
 
@@ -30,8 +30,8 @@ Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
   5. Erstellen der PowerPoint-Präsentation
   
 Selbstverständlich kann Schritt drei auch in **R** erledigt werden.
-Dieser Workflow ist jedoch meines Erachtens aus folgenden Gründen mit einigen
-Fallstricken versehen.
+Dieser Workflow hat meines Erachtens einige
+Fallstricke.
 
 ## Fallstricke
 
@@ -73,7 +73,7 @@ schulen.nrw <- read.table('https://www.schulministerium.nrw.de/docs/bp/Ministeri
                    , fileEncoding= 'WINDOWS-1252')
 str(schulen.nrw)
 ```
-Die Daten Erfassen die Anzahl der Schüler und Schülerinnen (SuS), Klassen, Lehrkräfte und die erteilten
+Die Daten erfassen die Anzahl der Schüler und Schülerinnen (SuS), Klassen, Lehrkräfte und die erteilten
 Stunden aggregiert auf Kreisebene in NRW. Da in dieser Betrachtung nur öffentliche Schulen untersucht werden sollen, werden die privaten Schulen aus dem Datensatz entfernt.
 Gleichzeitig ist aus dem Listing vorher erkennbar, dass die Textvariablen des Datensatzes
 unnötige Umbrüche und Leerstellen enthalten, diese sollten vor der Analyse entfernt werden:
@@ -111,10 +111,10 @@ schulen.num <- sapply(schulen.nrw, is.numeric)
 schulen.num <- schulen.nrw[schulen.num %in% TRUE]
 apply(schulen.num , 2, summary)
 ```
-Bei der Variable "lehrkräfte" scheint es Fälle zu geben an denen
-0 Lehrkräfte tätig sind. Entweder ist das ein Fehler bei der Dateneingabe
-oder es handelt sich um Schulen mit einer Sonderfunktion.
-Wenn die Anzahl sich auf einem niedrigem Niveau bewegt, sollten solche Fälle aus dem Datensatz
+Bei der Variablen "lehrkräfte" scheint es Fälle zu geben, in denen
+0 Lehrkräfte tätig sind. Entweder handelt es sich um einen Fehler bei der Dateneingabe
+oder es sind Schulen mit einer Sonderfunktion.
+Wenn die Anzahl sich auf einem niedrigen Niveau bewegt, sollten solche Fälle aus dem Datensatz
 entfernt werden:
 
 ```{r, echo=TRUE, eval=TRUE}
@@ -128,7 +128,7 @@ schulen.num <- schulen.num[which(schulen.num$lehrkraefte > 0), ]
 Der Text- und der numerische Datensatz können jetzt wieder zusammengesetzt werden.
 Da aus dem numerischen Datensatz Fälle entfernt wurden, sind beide Datensätze nicht
 mehr identisch lang. Ein Matching über die Indexvariablen in den beiden Datensätzen
-erlaubt jedoch eine leichtes zusammmenführung:
+erlaubt jedoch eine leichtes Zusammenführen:
 
 ```{r, eval=TRUE, echo=TRUE}
 dim(schulen.text)[1] == dim(schulen.num)[1]
@@ -163,7 +163,7 @@ summary(schulen.nrw$lehr.distri)
 ```
 Lehrkräfte in NRW haben in der betrachteten Zeitspanne durchschnittlich 12 SuS betreut.
 Dreiviertel der Lehrkräfte waren hierbei für 14 oder weniger SuS zuständig.
-Die komplette Verteilung des Betreuungsverhältnis lässt sich hierbei am
+Die komplette Verteilung des Betreuungsverhältnisses lässt sich hierbei am
 besten mit einem Histogramm visualisieren.
 
 
@@ -179,7 +179,7 @@ hist(schulen.nrw$lehr.distri
 lines(density(schulen.nrw$lehr.distri)
       ,  col='darkgrey') # Glättung des Histogramms durch Gauß-Kernel
 ```
-Das Histogramm gibt ein allgemeinen Überblick
+Das Histogramm gibt einen allgemeinen Eindruck
 über das Betreuungsverhältnis im Beobachtungszeitraum.
 Es wird erkennbar, dass die meisten SuS in NRW
 von 10 bis 15 Lehrkräften betreut werden.
@@ -251,10 +251,10 @@ lassen sich mit dem **officer**
 Paket auch die verschiedenste [Tabellen](https://davidgohel.github.io/officer/articles/offcran/tables.html)
 erstellen. 
 
-Das wichtigste bei diesem Workflow ist jedoch m.E. dass die beschriebenen Fallstricke,
+Das wichtigste bei diesem Workflow ist m.E. jedoch, dass die beschriebenen Fallstricke,
 vermieden werden. Ein Im/Export in MS-Office wird obsolet,
-dies führt dazu, dass keine Daten, durch fälschliches kopieren, unterschlagen werden.
-Darüber hinaus wird die Blackbox beim erstellen von PowerPoint-Präsentation
+dies führt dazu, dass keine Daten, durch fälschliches kopieren, übersehen werden.
+Darüber hinaus wird die Blackbox beim Erstellen von PowerPoint-Präsentation
 aufgebrochen, da die Erzeugung der Grafiken und Tabellen nun im R-Skript
 dokumentiert wird. Der riesige Zeitgewinn der entsteht, da nun
 viel weniger Zeit für das "powerpoint-engineering" aufgewendet wird, ist ein

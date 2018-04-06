@@ -30,10 +30,10 @@
     
 
     
-    <meta name="description" content="Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art Arbeitsablauf häufig zu.
+    <meta name="description" content="Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen möchten an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art Arbeitsablauf häufig zu.
 Workflow  Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
 Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Ergebnisse als .csv oder .xls in R Erstellung von Grafiken bzw.">
-    <meta property="og:description" content="Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art Arbeitsablauf häufig zu.
+    <meta property="og:description" content="Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen möchten an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art Arbeitsablauf häufig zu.
 Workflow  Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
 Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Ergebnisse als .csv oder .xls in R Erstellung von Grafiken bzw.">
     <meta property="og:type" content="blog">
@@ -42,7 +42,7 @@ Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Er
     <meta property="og:site_name" content="Alexander Balko">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Alexander Balko">
-    <meta name="twitter:description" content="Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art Arbeitsablauf häufig zu.
+    <meta name="twitter:description" content="Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen möchten an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art Arbeitsablauf häufig zu.
 Workflow  Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
 Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Ergebnisse als .csv oder .xls in R Erstellung von Grafiken bzw.">
     
@@ -258,7 +258,7 @@ Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Er
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art Arbeitsablauf häufig zu.</p>
+              <p>Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen möchten an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art Arbeitsablauf häufig zu.</p>
 <div id="workflow" class="section level2">
 <h2>Workflow</h2>
 <!--more-->
@@ -270,7 +270,7 @@ Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Er
 <li>Import der Grafiken und Tabellen in PowerPoint</li>
 <li>Erstellen der PowerPoint-Präsentation</li>
 </ol>
-<p>Selbstverständlich kann Schritt drei auch in <strong>R</strong> erledigt werden. Dieser Workflow ist jedoch meines Erachtens aus folgenden Gründen mit einigen Fallstricken versehen.</p>
+<p>Selbstverständlich kann Schritt drei auch in <strong>R</strong> erledigt werden. Dieser Workflow hat meines Erachtens einige Fallstricke.</p>
 </div>
 <div id="fallstricke" class="section level2">
 <h2>Fallstricke</h2>
@@ -311,7 +311,7 @@ str(schulen.nrw)</code></pre>
 ##  $ KLASSEN              : int  756 20 759 1 752 309 16 379 238 318 ...
 ##  $ LEHRKRAEFTE          : int  1268 49 1198 3 1228 521 28 621 374 488 ...
 ##  $ ERT_STUNDEN          : num  23710 933 22236 38 23066 ...</code></pre>
-<p>Die Daten Erfassen die Anzahl der Schüler und Schülerinnen (SuS), Klassen, Lehrkräfte und die erteilten Stunden aggregiert auf Kreisebene in NRW. Da in dieser Betrachtung nur öffentliche Schulen untersucht werden sollen, werden die privaten Schulen aus dem Datensatz entfernt. Gleichzeitig ist aus dem Listing vorher erkennbar, dass die Textvariablen des Datensatzes unnötige Umbrüche und Leerstellen enthalten, diese sollten vor der Analyse entfernt werden:</p>
+<p>Die Daten erfassen die Anzahl der Schüler und Schülerinnen (SuS), Klassen, Lehrkräfte und die erteilten Stunden aggregiert auf Kreisebene in NRW. Da in dieser Betrachtung nur öffentliche Schulen untersucht werden sollen, werden die privaten Schulen aus dem Datensatz entfernt. Gleichzeitig ist aus dem Listing vorher erkennbar, dass die Textvariablen des Datensatzes unnötige Umbrüche und Leerstellen enthalten, diese sollten vor der Analyse entfernt werden:</p>
 <pre class="r"><code>## Die Namen der Variablen einheitlich kleingedruckt:
 names(schulen.nrw) &lt;- tolower(names(schulen.nrw))
 ## ausschließen der Privatschulen
@@ -354,14 +354,14 @@ apply(schulen.num , 2, summary)</code></pre>
 ## Mean          5205.754  206.7906    394.3883     7163.17 1132.50
 ## 3rd Qu.       7693.500  268.0000    521.0000     9468.25 1698.25
 ## Max.         39709.000 1919.0000   2806.0000    51531.00 2264.00</code></pre>
-<p>Bei der Variable “lehrkräfte” scheint es Fälle zu geben an denen 0 Lehrkräfte tätig sind. Entweder ist das ein Fehler bei der Dateneingabe oder es handelt sich um Schulen mit einer Sonderfunktion. Wenn die Anzahl sich auf einem niedrigem Niveau bewegt, sollten solche Fälle aus dem Datensatz entfernt werden:</p>
+<p>Bei der Variablen “lehrkräfte” scheint es Fälle zu geben, in denen 0 Lehrkräfte tätig sind. Entweder handelt es sich um einen Fehler bei der Dateneingabe oder es sind Schulen mit einer Sonderfunktion. Wenn die Anzahl sich auf einem niedrigen Niveau bewegt, sollten solche Fälle aus dem Datensatz entfernt werden:</p>
 <pre class="r"><code>## Anteil der Fälle mit 0 Lehrkräften
 sum(schulen.num[schulen.num$lehrkraefte==0,]$schueler_innen)/sum(schulen.num$schueler_innen)</code></pre>
 <pre><code>## [1] 1.069081e-05</code></pre>
 <pre class="r"><code>## Diese Merkmalsausprägung scheint die absolute Aussnahme darzustellen,
 ## diese Fälle können deshalb entfernt werden
 schulen.num &lt;- schulen.num[which(schulen.num$lehrkraefte &gt; 0), ]</code></pre>
-<p>Der Text- und der numerische Datensatz können jetzt wieder zusammengesetzt werden. Da aus dem numerischen Datensatz Fälle entfernt wurden, sind beide Datensätze nicht mehr identisch lang. Ein Matching über die Indexvariablen in den beiden Datensätzen erlaubt jedoch eine leichtes zusammmenführung:</p>
+<p>Der Text- und der numerische Datensatz können jetzt wieder zusammengesetzt werden. Da aus dem numerischen Datensatz Fälle entfernt wurden, sind beide Datensätze nicht mehr identisch lang. Ein Matching über die Indexvariablen in den beiden Datensätzen erlaubt jedoch eine leichtes Zusammenführen:</p>
 <pre class="r"><code>dim(schulen.text)[1] == dim(schulen.num)[1]</code></pre>
 <pre><code>## [1] FALSE</code></pre>
 <pre class="r"><code>## Matching mittels der erstellten Indezes
@@ -385,7 +385,7 @@ stopifnot(as.numeric(schulen.nrw$idx.chr) == schulen.nrw$idx.num)</code></pre>
 summary(schulen.nrw$lehr.distri)</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##   2.778  10.367  12.118  12.531  14.727  28.589</code></pre>
-<p>Lehrkräfte in NRW haben in der betrachteten Zeitspanne durchschnittlich 12 SuS betreut. Dreiviertel der Lehrkräfte waren hierbei für 14 oder weniger SuS zuständig. Die komplette Verteilung des Betreuungsverhältnis lässt sich hierbei am besten mit einem Histogramm visualisieren.</p>
+<p>Lehrkräfte in NRW haben in der betrachteten Zeitspanne durchschnittlich 12 SuS betreut. Dreiviertel der Lehrkräfte waren hierbei für 14 oder weniger SuS zuständig. Die komplette Verteilung des Betreuungsverhältnisses lässt sich hierbei am besten mit einem Histogramm visualisieren.</p>
 </div>
 <div id="erstellen-von-grafiken" class="section level2">
 <h2>Erstellen von Grafiken</h2>
@@ -398,7 +398,7 @@ summary(schulen.nrw$lehr.distri)</code></pre>
      , xlab=&#39;&#39;)
 lines(density(schulen.nrw$lehr.distri)
       ,  col=&#39;darkgrey&#39;) # Glättung des Histogramms durch Gauß-Kernel</code></pre>
-<p><img src="/post/2018-03-26-verwendung-des-reporters-pakets_files/figure-html/unnamed-chunk-8-1.png" width="672" /> Das Histogramm gibt ein allgemeinen Überblick über das Betreuungsverhältnis im Beobachtungszeitraum. Es wird erkennbar, dass die meisten SuS in NRW von 10 bis 15 Lehrkräften betreut werden.</p>
+<p><img src="/post/2018-03-26-verwendung-des-reporters-pakets_files/figure-html/unnamed-chunk-8-1.png" width="672" /> Das Histogramm gibt einen allgemeinen Eindruck über das Betreuungsverhältnis im Beobachtungszeitraum. Es wird erkennbar, dass die meisten SuS in NRW von 10 bis 15 Lehrkräften betreut werden.</p>
 <p>Einen informativeren Überblick kann die Aufteilung des Datensatzes nach Schulform liefern. Hierfür wird der Datensatz in disjunkte Partitionen unterteilt.</p>
 <pre class="r"><code>schulen.nrw.schulform &lt;- split(schulen.nrw, schulen.nrw$schulform_text)
 length(schulen.nrw.schulform) ## Anzahl der Partitionen/Datensätze</code></pre>
@@ -447,7 +447,7 @@ for(i in names(schulen.nrw.schulform) ){                                        
 print(doc, &#39;/home/alex/Downloads/betreuung.pptx&#39; ) ## Ausgabe der PPTX am angegebenem LOKALEM Speicherpfad</code></pre>
 <pre><code>## [1] &quot;/home/alex/Downloads/betreuung.pptx&quot;</code></pre>
 <p>Ohne viel Aufwand kann hiermit ein automatisiertes Reporting durchgeführt werden. Je nach Variable ist sogar eine weitere Partitionierung möglich, so dass noch differenziertere Auswertungen erfolgen können. So wäre es möglich das Betreuungsverhältnis in den jeweiligen Regierungsbezirken darzustellen. Neben der Darstellung von Grafiken lassen sich mit dem <strong>officer</strong> Paket auch die verschiedenste <a href="https://davidgohel.github.io/officer/articles/offcran/tables.html">Tabellen</a> erstellen.</p>
-<p>Das wichtigste bei diesem Workflow ist jedoch m.E. dass die beschriebenen Fallstricke, vermieden werden. Ein Im/Export in MS-Office wird obsolet, dies führt dazu, dass keine Daten, durch fälschliches kopieren, unterschlagen werden. Darüber hinaus wird die Blackbox beim erstellen von PowerPoint-Präsentation aufgebrochen, da die Erzeugung der Grafiken und Tabellen nun im R-Skript dokumentiert wird. Der riesige Zeitgewinn der entsteht, da nun viel weniger Zeit für das “powerpoint-engineering” aufgewendet wird, ist ein weiterer großer Pluspunkt der das Arbeiten mit dem <strong>officer</strong> Paket attraktiv macht.</p>
+<p>Das wichtigste bei diesem Workflow ist m.E. jedoch, dass die beschriebenen Fallstricke, vermieden werden. Ein Im/Export in MS-Office wird obsolet, dies führt dazu, dass keine Daten, durch fälschliches kopieren, übersehen werden. Darüber hinaus wird die Blackbox beim Erstellen von PowerPoint-Präsentation aufgebrochen, da die Erzeugung der Grafiken und Tabellen nun im R-Skript dokumentiert wird. Der riesige Zeitgewinn der entsteht, da nun viel weniger Zeit für das “powerpoint-engineering” aufgewendet wird, ist ein weiterer großer Pluspunkt der das Arbeiten mit dem <strong>officer</strong> Paket attraktiv macht.</p>
 <div id="addendum-zur-reproduktion" class="section level3">
 <h3>Addendum zur Reproduktion:</h3>
 <pre><code>## R version 3.4.4 (2018-03-15)
@@ -726,7 +726,7 @@ print(doc, &#39;/home/alex/Downloads/betreuung.pptx&#39; ) ## Ausgabe der PPTX a
                   Mar 3, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art Arbeitsablauf häufig zu.
+              <div class="media-content hide-xs font-merryweather">Die Verwendung des “officer” Pakets ist für Anwender sinnvoll, die ein Reporting erstellen möchten an dessen Ende eine PowerPoint-Präsentation steht. Gerade bei der Zusammenarbeit in mehreren Teams oder der Dokumentation bzw. Berichterstattung für Einheiten auf Leitungsebene trifft diese Art Arbeitsablauf häufig zu.
 Workflow  Mein bisheriges Vorgehen in diesen Fällen war folgendermaßen:
 Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Ergebnisse als .csv oder .xls in R Erstellung von Grafiken bzw.</div>
             </div>
@@ -746,7 +746,8 @@ Datenwrangling, -management und -bereinigung in R Datenanalyse und Export der Er
                 </span>
               </span>
               <div class="media-content hide-xs font-merryweather">Dieser Blog widmet sich den unterschiedlichsten Themen rund um den Bereich Datenanalyse. Die Blogbeiträge werden hierbei vornehmlich die Programmiersprache R nutzen, um die unterschiedlichsten Fragestellungen zu untersuchen. 
-Warum R? Die Verwendung von R ergibt sich in diesem Kontext aus meinem CV, da es meine native Programmiersprache ist. Einige Beiträge werden auch andere Sprachen wie Python oder Julia verwenden, falls die Kompatibilität mit anderen Sprachen oder Software einen effizienteren Workflow verspricht.</div>
+Warum R? Die Verwendung von R ergibt aus meinem CV, da es meine native Programmiersprache ist. Einige Beiträge werden auch andere Sprachen wie Python oder Julia verwenden, falls die Kompatibilität mit anderen Sprachen oder Software einen effizienteren Workflow verspricht.
+Die aktuelle Debatte in der Data Science-Community, ob es eine überlegene Sprache im Bereich der Datenanalyse gibt, ist m.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
