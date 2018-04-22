@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R Gis on Alexander Balko</title>
+    <link>/categories/r-gis/</link>
+    <description>Recent content in R Gis on Alexander Balko</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 22 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/r-gis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>GIS Reporting mit R</title>
+      <link>/2018/04/gis-reporting-mit-r/</link>
+      <pubDate>Sun, 22 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/04/gis-reporting-mit-r/</guid>
+      <description>Dieser Post zeigt wie man mittels R ein GIS-Reporting erstellt und kann als Ergänzung zum letzten Beitrag betrachtet werden. Geographische-Informationssystemen (GIS) werden verwendet, um räumliche Informationen zu verarbeiten und abzubilden. Ein Großteil der offenen Datensätze enthalten Ortsangaben, die sich mit GIS anreichern lassen und R stellt zahlreiche Pakete zu Verfügung mit den sich ein GIS umsetzen lässt.</description>
+    </item>
+    
+  </channel>
+</rss>
