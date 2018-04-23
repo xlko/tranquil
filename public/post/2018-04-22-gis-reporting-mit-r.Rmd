@@ -11,9 +11,126 @@ tags:
   - leaflet geojson
 ---
 
+
+```{r, echo=FALSE, eval=TRUE}
+schulen.nrw <- read.table('https://www.schulministerium.nrw.de/docs/bp/Ministerium/Open_MSB/Open_Data/FAQ-Eckdaten/OpenData_Eckdaten.csv'
+                          , header=TRUE
+                          , sep=';'
+                          , stringsAsFactors=FALSE
+                          , dec=','
+                          , fileEncoding= 'WINDOWS-1252')
+## einheitliche namen vergeben
+names(schulen.nrw) <- tolower(names(schulen.nrw))
+## entfernen von unnötigen leerstellen und Umbrüchen in der textvariablen
+schulen.nrw.text <- sapply(schulen.nrw,  function(x){
+  x <- x[is.character(x)]
+  x <- gsub("(?<=[\\s])\\s*|^\\s+|\\s+$", "",perl=TRUE, x)
+  return(x)
+})
+
+schulen.nrw.text <- do.call('cbind', schulen.nrw.text)
+schulen.nrw <- schulen.nrw[!(names(schulen.nrw) %in% colnames(schulen.nrw.text))]
+schulen.nrw <- as.data.frame(cbind(schulen.nrw, schulen.nrw.text))
+
+## aussortieren von privaten schulen
+schulen.nrw <- schulen.nrw[!(schulen.nrw$rechtsform_text %in% 'privat'),]
+schulen.num <- sapply(schulen.nrw, is.numeric)
+schulen.num <- schulen.nrw[schulen.num %in% TRUE]
+# zummenfassung der numerischen variablen
+## Zwei Dinge
+## 1:
+
+schulen.nrw$betreuung <- schulen.nrw$schueler_innen/schulen.nrw$lehrkraefte
+## Anscheinend existieren Schulen in NRW mit 0 Lehrkräften
+## Wie viele Schüler*innen fallen unter diese Schulen
+## Okay dies scheint der absolute Ausnahmefall,
+## was auf einen Fehler in der Datenerfassung hindeutet
+## diese Schulen können bedenklos aus der Betrachtung entfernt werden.
+schulen.nrw <- schulen.nrw[which(schulen.nrw$lehrkraefte > 0),]
+schulen.nrw$betreuung <- schulen.nrw$schueler_innen/schulen.nrw$lehrkraefte
+```
+
+
 Dieser Post zeigt wie man mittels **R** ein **GIS**-Reporting erstellt
 und kann als Ergänzung zum letzten Beitrag betrachtet werden.
-Geographische-Informationssystemen (GIS) werden verwendet, um räumliche Informationen zu verarbeiten und abzubilden.
+Geographische-Informationssysteme (GIS) werden verwendet, um räumliche Informationen zu verarbeiten und abzubilden.
 Ein Großteil der offenen Datensätze enthalten Ortsangaben,
-die sich mit GIS anreichern lassen und R stellt zahlreiche [Pakete](https://cran.r-project.org/web/views/Spatial.html) zu
+die sich mit GIS verknüpfen lassen, so dass die Ortsangaben kartographisch genutzt werden können.
+R stellt zahlreiche [Pakete](https://cran.r-project.org/web/views/Spatial.html) zu
 Verfügung mit den sich ein GIS umsetzen lässt.
+
+Im letzten Post wurden die [Daten](https://www.schulministerium.nrw.de/docs/bp/Ministerium/Open_MSB/Open_Data/FAQ-Eckdaten/OpenData_Eckdaten.csv) zu den Schülerzahlen in NRW verwendet, um ein [Powerpoint-Reporting](https://www.datascop.de/2018/03/verwendung-des-reporters-pakets/)
+zur Schüler-Lehrer Relation zu erstellen, die in der Variablen "betreuung" festgehalten wurde.
+Nach dem Datenmanagement lag folgender Datensatz vor:
+
+```{r, echo=FALSE, eval=TRUE}
+library(DT)
+datatable(schulen.nrw)
+```
+
+Eine weitere Möglichkeit die Daten darzustellen, ist die Visualisierung in einer
+Karte. Öffentliche Daten in Deutschland sind häufig, aufgrund von Anonymisierung, über
+Gebietseinheiten (Bundesländer, Landkreise, usw.) aggregiert. Diese
+Aggregation kann in Chorophletenkarten visualisiert werden. Im Datensatz
+liegen in den Variablen "regierungsbezirk" und "kreis" räumliche Informationen vor.
+Diese alleine reichen jedoch nicht aus für eine kartographische Darstellung.
+Es fehlen Informationen zu Flächeneinheiten und deren Koordinatenbezug, sog.
+Shapefiles. Eine Verknüpfung der Daten mit diesen shapefiles erlaubt, das
+erstellen von Chorophleten.
+Eine nicht-proprietäre Variante dieser Shapefiles sind Dateien im **.geojson** Format und
+können für NRW im [OpenDataLab](http://opendatalab.de/projects/geojson-utilities/) bezogen werden. Mit dem Paket [geojsonio](https://cran.r-project.org/web/packages/geojsonio/index.html)
+lässt sich dieses Datenformat in **R** einlesen.
+
+```{r, echo=TRUE, eval=TRUE}
+library(geojsonio, warn.conflicts=FALSE)
+library(leaflet)
+nrw <- geojson_read("/home/alex/Downloads/landkreise_simplify200.geojson",
+                    what = "sp")
+karte.nrw <- leaflet(nrw) 
+karte.nrw <-  setView(karte.nrw, 7.61,51.5,   zoom=0) 
+karte.nrw <-  fitBounds(karte.nrw, 5.5, 50.26, 9.51, 52.55)
+karte.nrw <-  addTiles(karte.nrw)
+karte.nrw <-  addPolygons(karte.nrw)
+karte.nrw
+```
+Die geojson Datei wird nach dem einlesen als ein S4-Objekt
+ausgegeben und liegt nicht in einer klassischen Datenmatrix vor. Daten und Geoinformationen
+befinden sich in getrennten Slots und müssen dementsprechend bearbeitet werden. Weitere
+Erläuterungen zu  S4-Objekten finden sich [hier](https://stackoverflow.com/questions/4143611/sources-on-s4-objects-methods-and-programming-in-r). Ein Blick in Daten-Slot des shapefiles zeigt, ob es Möglichkeiten des Matchings
+mit dem Schuldatensatz gibt:
+
+```{r, echo=TRUE, eval=TRUE}
+str(nrw@data)
+```
+
+Über die Variablen *schulen.nrw\$kreis_text* und *nrw\$GEN* lässt sich ein Matching
+durchführen. Eine Anpassung der Textvariablen ist jedoch notwendig:
+
+```{r, echo=TRUE, eval=TRUE}
+## Erstellen einer neuen Textvariable ohne Attribut "Kreis" und "Krfr"
+schulen.nrw$kreis_match     <- sub('(^Krfr. Stadt\\s|^Kreis\\s)', '', schulen.nrw$kreis_text)
+## Aggregieren von Betreuungsverhältnis über Landkreise als neue Variable
+schulen.nrw$betreuung_kreis <- ave(schulen.nrw$betreuung,
+                                   schulen.nrw$kreis_match,
+                                   FUN = function(x){mean(x, na.rm=TRUE)})
+## Datensatz bestehend aus den zwei neuen Variablen
+schulen.match <- schulen.nrw[names(schulen.nrw) %in% c('kreis_match', 'betreuung_kreis')]
+## Entfernen der Kreis-Duplikate
+schulen.match <- schulen.match[!duplicated(schulen.match$kreis_match), ]
+schulen.match <- schulen.match[order(schulen.match$kreis_match), ]
+nrw@data      <- nrw@data[order(nrw@data$GEN), ]
+## Abbruch des Skripts wenn beide Variablen nicht identisch sind
+stopifnot(nrw@data$GEN == schulen.match$kreis_match)
+## Falls identisch dann als neue Variablen in den Datenslot des kartendatensatzes hinzufügen
+nrw@data$betreuung  <- schulen.match$betreuung_kreis
+```
+Die Verbindung der unterschiedlichen Slots im Shapefile werden durch die Zeilnamen gewährleistet.
+Die Zeilnamen verbinden die Datenattribute mit den räumlichen Infos. Es ist daher besonders
+wichtig,**dass die Zeilnamen über alle Slots hinweg in gleicher Reihenfolge vorliegen**.
+Ansonsten werden den Daten die falschen räumlichen Informationen zugeordnet.
+```{r, echo=TRUE, eval=TRUE}
+nrw@data <- nrw@data[order(as.numeric(rownames(nrw@data))), ]
+```
+Mit dem leaflet Paket kann nun mittels Javascript eine kartografische Darstellung
+des Betreuungsverhältnis erfolgen.
+
