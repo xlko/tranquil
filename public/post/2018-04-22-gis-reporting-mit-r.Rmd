@@ -77,8 +77,8 @@ Aggregation kann in Chorophletenkarten visualisiert werden. Im Datensatz
 liegen in den Variablen "regierungsbezirk" und "kreis" räumliche Informationen vor.
 Diese alleine reichen jedoch nicht aus für eine kartographische Darstellung.
 Es fehlen Informationen zu Flächeneinheiten und deren Koordinatenbezug, sog.
-Shapefiles. Eine Verknüpfung der Daten mit diesen shapefiles erlaubt, das
-erstellen von Chorophleten.
+Shapefiles. Eine Verknüpfung der Daten mit diesen shapefiles erlaubt das
+Erstellen von Chorophletenkarten.
 
 ## Kartenbezug
 Eine nicht-proprietäre Variante dieser Shapefiles sind Dateien im **.geojson** Format und
@@ -90,12 +90,12 @@ shapefile plotten lässt.
 ```{r, echo=TRUE, eval=TRUE}
 library(geojsonio, warn.conflicts=FALSE)
 library(leaflet)
-nrw <- geojson_read("/home/xanbono/blogs/rscriptpost/landkreise_simplify200.geojson",
+nrw <- geojson_read("/home/alex/blogdown/rscriptpost/landkreise_simplify200.geojson",
                     what = "sp")
 ## Einbinden des shapefile in die Karte
 karte.nrw <-  leaflet(nrw) 
 ## Definition der Anzeige des Kartenausschnitts mittels Koordinaten
-karte.nrw <-  setView(karte.nrw, 7.61,51.5,   zoom=2) 
+karte.nrw <-  setView(karte.nrw, 7.61,51.5,   zoom=0) 
 karte.nrw <-  fitBounds(karte.nrw, 5.5, 50.26, 9.51, 52.55)
 karte.nrw <-  addTiles(karte.nrw)
 ## Einsetzen der Fälchen in den Karten layer
@@ -104,12 +104,12 @@ karte.nrw <-  addPolygons(karte.nrw)
 karte.nrw
 ```
 Die geojson Datei wird nach dem einlesen als ein S4-Objekt
-ausgegeben und liegt nicht in einer klassischen Datenmatrix vor. Daten und Geoinformationen
-befinden sich in getrennten Slots und müssen dementsprechend bearbeitet werden. Weitere
-Erläuterungen zu  S4-Objekten finden sich [hier](https://stackoverflow.com/questions/4143611/sources-on-s4-objects-methods-and-programming-in-r). Ein Blick in Daten-Slot des shapefiles zeigt, ob es Möglichkeiten des Matchings
+ausgegeben und liegt **nicht** in einer klassischen Datenmatrix vor. Daten und Geoinformationen
+befinden sich in getrennten Einheiten sog. Slots und müssen dementsprechend bearbeitet werden. Weitere
+Erläuterungen zu  S4-Objekten finden sich [hier](https://stackoverflow.com/questions/4143611/sources-on-s4-objects-methods-and-programming-in-r). Ein Blick in den Daten-Slot des shapefiles zeigt, ob es Möglichkeiten des Matchings
 mit dem Schuldatensatz gibt:
 
-```{r, echo=TRUE, eval=TRUE}
+```{r, echo=FALSE, eval=TRUE}
 str(nrw@data)
 ```
 
@@ -154,17 +154,18 @@ Lehrer erstellt werden.
 ```{r, echo=TRUE, eval = TRUE}
 karte.nrw <-  leaflet(nrw) 
 ## Definition der Anzeige des Kartenausschnitts mittels Koordinaten
-karte.nrw <-  setView(karte.nrw, 7.61,51.5,   zoom=2) 
+karte.nrw <-  setView(karte.nrw, 7.61,51.5,   zoom=1) 
 karte.nrw <-  fitBounds(karte.nrw, 5.5, 50.26, 9.51, 52.55)
 karte.nrw <-  addTiles(karte.nrw)
 ## Javascript labels mittels C# Wrapper erstellen
-labels <- sprintf("<strong>%s</strong><br/>%g Lehrkraft pro SuS",
+labels <- sprintf("<strong>%s</strong><br/>%g SuS pro Lehrkraft",
                   nrw$GEN,
                   round(nrw$betreuung,2))
 ## Ablegen der Labels in eine Liste
 labels    <- lapply(labels, htmltools::HTML)
 ## Funktion für Farben Intervalle in Chorophletenkarte
 farben    <-    colorBin("Reds", domain = nrw$betreuung, bins=4)
+## Plotten der Flächenanteile und hinzufügen einer Legende
 karte.nrw <- addPolygons(karte.nrw,
                           fillColor = ~farben(nrw$betreuung),
                           weight = 2,
@@ -193,5 +194,15 @@ karte.nrw <-  addLegend(karte.nrw,
 karte.nrw
 ```
 
+Die Visualisierung des Betreuungsverhältnisses mittels Chorophletenkarte lässt auf einen
+Blick erkennen in welchem Kreis in NRW Lehrer besonders viel bzw. wenig Schüler betreuen.
+Gerade um einen ersten Eindruck über die untschiedlichen Anteile und der räumlichen
+Bezug zu gewinnen ist diese Darstellungsform besonders geeignet.
+
+
+### Infos zur Reproduktion
+```{r, echo=FALSE, eval=TRUE}
+sessionInfo()
+```
 
 
