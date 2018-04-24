@@ -65,10 +65,14 @@ Im letzten Post wurden die [Daten](https://www.schulministerium.nrw.de/docs/bp/M
 zur Schüler-Lehrer Relation zu erstellen, die in der Variablen "betreuung" festgehalten wurde.
 Nach dem Datenmanagement lag folgender Datensatz vor:
 
-```{r, echo=FALSE, eval=TRUE}
+```{r, echo=FALSE, eval=TRUE, warnings=FALSE}
 library(DT)
-datatable(schulen.nrw)
+library(widgetframe)
+schulennrw <- datatable(schulen.nrw)
+frameWidget(schulennrw)
 ```
+
+
 
 Eine weitere Möglichkeit die Daten darzustellen, ist die Visualisierung in einer
 Karte. Öffentliche Daten in Deutschland sind häufig, aufgrund von Anonymisierung, über
@@ -93,7 +97,7 @@ library(leaflet)
 nrw <- geojson_read("/home/alex/blogdown/rscriptpost/landkreise_simplify200.geojson",
                     what = "sp")
 ## Einbinden des shapefile in die Karte
-karte.nrw <-  leaflet(nrw) 
+karte.nrw <-  leaflet(nrw, height=500) 
 ## Definition der Anzeige des Kartenausschnitts mittels Koordinaten
 karte.nrw <-  setView(karte.nrw, 7.61,51.5,   zoom=0) 
 karte.nrw <-  fitBounds(karte.nrw, 5.5, 50.26, 9.51, 52.55)
