@@ -17,7 +17,7 @@
       <pubDate>Sun, 22 Apr 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/04/gis-reporting-mit-r/</guid>
-      <description>Dieser Post zeigt wie man mittels R ein GIS-Reporting erstellt und kann als Ergänzung zum letzten Beitrag betrachtet werden. Geographische-Informationssysteme (GIS) werden verwendet, um räumliche Informationen zu verarbeiten und abzubilden. Ein Großteil der offenen Datensätze enthalten Ortsangaben, die sich mit GIS verknüpfen lassen, so dass die Ortsangaben kartographisch genutzt werden können. R stellt zahlreiche Pakete zu Verfügung mit den sich ein GIS umsetzen lässt.</description>
+      <description>Dieser Beitrag zeigt wie man mittels R ein GIS-Reporting erstellt und kann als Ergänzung zum letzten Beitrag betrachtet werden. Geographische-Informationssysteme (GIS) werden verwendet, um räumliche Informationen zu verarbeiten und abzubilden. Ein Großteil der offenen Datensätze enthalten Ortsangaben, die sich mit GIS verknüpfen lassen, so dass die Ortsangaben kartographisch genutzt werden können. R stellt zahlreiche Pakete zu Verfügung mit denen sich ein GIS umsetzen lässt.</description>
     </item>
     
   </channel>

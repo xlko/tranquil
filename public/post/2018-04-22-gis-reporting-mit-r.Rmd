@@ -5,6 +5,7 @@ date: '2018-04-22'
 slug: gis-reporting-mit-r
 thumbnailImagePosition: "top"
 thumbnailImage: https://images.unsplash.com/photo-1482059470115-0aadd6bf6834?ixlib=rb-0.3.5&s=afeb4a7e9a541ba4fad70d5a369dc1f3&auto=format&fit=crop&w=500&q=60
+coverImage: https://images.unsplash.com/photo-1482059470115-0aadd6bf6834?ixlib=rb-0.3.5&s=afeb4a7e9a541ba4fad70d5a369dc1f3&auto=format&fit=crop&w=500&q=60
 categories:
   - R GIS
 tags:
@@ -51,18 +52,18 @@ schulen.nrw$betreuung <- schulen.nrw$schueler_innen/schulen.nrw$lehrkraefte
 ```
 
 
-Dieser Post zeigt wie man mittels **R** ein **GIS**-Reporting erstellt
+Dieser Beitrag zeigt wie man mittels **R** ein **GIS**-Reporting erstellt
 und kann als Ergänzung zum letzten Beitrag betrachtet werden.
 Geographische-Informationssysteme (GIS) werden verwendet, um räumliche Informationen zu verarbeiten und abzubilden.
 Ein Großteil der offenen Datensätze enthalten Ortsangaben,
 die sich mit GIS verknüpfen lassen, so dass die Ortsangaben kartographisch genutzt werden können.
 R stellt zahlreiche [Pakete](https://cran.r-project.org/web/views/Spatial.html) zu
-Verfügung mit den sich ein GIS umsetzen lässt.
+Verfügung mit denen sich ein GIS umsetzen lässt.
 
 ##Daten
 
-Im letzten Post wurden die [Daten](https://www.schulministerium.nrw.de/docs/bp/Ministerium/Open_MSB/Open_Data/FAQ-Eckdaten/OpenData_Eckdaten.csv) zu den Schülerzahlen in NRW verwendet, um ein [Powerpoint-Reporting](https://www.datascop.de/2018/03/verwendung-des-reporters-pakets/)
-zur Schüler-Lehrer Relation zu erstellen, die in der Variablen "betreuung" festgehalten wurde.
+Im letzten Post wurden die [Daten](https://www.schulministerium.nrw.de/docs/bp/Ministerium/Open_MSB/Open_Data/FAQ-Eckdaten/OpenData_Eckdaten.csv) der Schülerzahlen in NRW verwendet, um ein [Powerpoint-Reporting](https://www.datascop.de/2018/03/verwendung-des-reporters-pakets/)
+zur Schüler-Lehrer-Relation zu erstellen, die in der Variablen "betreuung" festgehalten wurde.
 Nach dem Datenmanagement lag folgender Datensatz vor:
 
 ```{r, echo=FALSE, eval=TRUE, warnings=FALSE}
@@ -79,7 +80,7 @@ Karte. Öffentliche Daten in Deutschland sind häufig, aufgrund von Anonymisieru
 Gebietseinheiten (Bundesländer, Landkreise, usw.) aggregiert. Diese
 Aggregation kann in Chorophletenkarten visualisiert werden. Im Datensatz
 liegen in den Variablen "regierungsbezirk" und "kreis" räumliche Informationen vor.
-Diese alleine reichen jedoch nicht aus für eine kartographische Darstellung.
+Diese alleine reichen jedoch nicht für eine kartographische Darstellung aus.
 Es fehlen Informationen zu Flächeneinheiten und deren Koordinatenbezug, sog.
 Shapefiles. Eine Verknüpfung der Daten mit diesen shapefiles erlaubt das
 Erstellen von Chorophletenkarten.
@@ -88,7 +89,7 @@ Erstellen von Chorophletenkarten.
 Eine nicht-proprietäre Variante dieser Shapefiles sind Dateien im **.geojson** Format und
 können für NRW im [OpenDataLab](http://opendatalab.de/projects/geojson-utilities/) bezogen werden. Mit dem Paket [geojsonio](https://cran.r-project.org/web/packages/geojsonio/index.html)
 lässt sich dieses Datenformat in **R** einlesen.
-Darüber hinaus kann mit dem [leaflet](https://rstudio.github.io/leaflet/) Paket über javascript eine Interaktive Karte eingebunden werden auf der sich das
+Darüber hinaus kann mit dem [leaflet](https://rstudio.github.io/leaflet/) Paket über javascript eine interaktive Karte eingebunden werden auf der sich das
 shapefile plotten lässt.
 
 ```{r, echo=TRUE, eval=TRUE}
@@ -107,9 +108,9 @@ karte.nrw <-  addPolygons(karte.nrw)
 ## Darstellung der Karte
 karte.nrw
 ```
-Die geojson Datei wird nach dem einlesen als ein S4-Objekt
+Die geojson Datei wird nach dem Einlesen als ein S4-Objekt
 ausgegeben und liegt **nicht** in einer klassischen Datenmatrix vor. Daten und Geoinformationen
-befinden sich in getrennten Einheiten sog. Slots und müssen dementsprechend bearbeitet werden. Weitere
+befinden sich in getrennten Einheiten -sog. Slots- und müssen dementsprechend bearbeitet werden. Weitere
 Erläuterungen zu  S4-Objekten finden sich [hier](https://stackoverflow.com/questions/4143611/sources-on-s4-objects-methods-and-programming-in-r). Ein Blick in den Daten-Slot des shapefiles zeigt, ob es Möglichkeiten des Matchings
 mit dem Schuldatensatz gibt:
 
@@ -139,7 +140,7 @@ stopifnot(nrw@data$GEN == schulen.match$kreis_match)
 ## Falls identisch dann als neue Variablen in den Datenslot des kartendatensatzes hinzufügen
 nrw@data$betreuung  <- schulen.match$betreuung_kreis
 ```
-Die Verbindung der unterschiedlichen Slots im Shapefile werden durch die Zeilnamen gewährleistet.
+Die Verbindung der unterschiedlichen Slots im Shapefile wird durch die Zeilnamen gewährleistet.
 Die Zeilnamen verbinden die Datenattribute mit den räumlichen Infos. Es ist daher besonders
 wichtig,**dass die Zeilnamen über alle Slots hinweg in gleicher Reihenfolge vorliegen**.
 Ansonsten werden den Daten die falschen räumlichen Informationen zugeordnet.
@@ -199,8 +200,8 @@ karte.nrw
 ```
 
 Die Visualisierung des Betreuungsverhältnisses mittels Chorophletenkarte lässt auf einen
-Blick erkennen in welchem Kreis in NRW Lehrer besonders viel bzw. wenig Schüler betreuen.
-Gerade um einen ersten Eindruck über die untschiedlichen Anteile und der räumlichen
+Blick erkennen, in welchem Kreis in NRW Lehrer besonders viel bzw. wenig Schüler betreuen.
+Gerade um einen ersten Eindruck über die unterschiedlichen Anteile und den räumlichen
 Bezug zu gewinnen ist diese Darstellungsform besonders geeignet.
 
 
